@@ -36,12 +36,12 @@ RUN mkdir -p /data/caddy/config.d
 RUN mkdir -p /data/caddy/log
 RUN mkdir -p /data/caddy/db
 
+# 复制构建阶段的文件
+COPY --from=BUILD /data/caddy /data/caddy
+
 COPY frontend /data/caddy/
 COPY gtmpl /data/caddy/
 COPY tmpl /data/caddy/
-
-# 复制构建阶段的文件
-COPY --from=BUILD /data/caddy /data/caddy
 
 # 配置权限
 RUN chmod +x /data/caddy/caddy 
