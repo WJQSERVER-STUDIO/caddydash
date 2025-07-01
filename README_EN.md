@@ -24,9 +24,9 @@ CaddyDash is a modern, user-friendly web interface for managing and configuring 
 **Backend:**
 
 *   **Go Language**: High-performance, concurrency-friendly backend service.
-*   **Touka Framework**: HTTP framework built on Go, used for handling web requests.
+*   **Touka Framework**: [Touka](https://github.com/infinite-iroha/touka) high-efficiency, multi-layered HTTP framework.
 *   **SQLite**: Lightweight embedded database for storing user and configuration data.
-*   **CaddyServer**: The core component.
+*   **CaddyServer**: Acts as the core component.
 
 ## 💡 Architecture Overview
 
@@ -60,7 +60,7 @@ services:
       # CaddyDash database file
       - ./db:/data/caddy/db
       # Caddy's internal data directory (e.g., certificate storage), which CaddyDash might manage
-      - ./caddy_internal_data:/root/.local/share/caddy
+      - ./caddy_internal_data:/root/.local/share/caddy # Caddy's default data directory
     
     restart: unless-stopped
 ```
@@ -78,6 +78,18 @@ CaddyDash frontend supports multi-language display.
 1.  Add new key-value pairs to `locales/en.json` and `locales/zh-CN.json`. Please follow the existing dot-separated naming convention (e.g., `pages.feature.new_text`).
 2.  In HTML, use `data-i18n="your.new.key"`, `data-i18n-title="your.new.key"`, or `data-i18n-placeholder="your.new.key"` attributes.
 3.  In JavaScript code, use the `t('your.new.key', { replacements })` function to retrieve translated text.
+
+## Related Projects
+
+### Core
+
+[Caddy Official Repository](https://github.com/caddyserver/caddy)
+
+### Backend
+
+[Touka Framework](https://github.com/infinite-iroha/touka)
+[SQLite Driver](https://modernc.org/sqlite)
+[Touka Middleware...](https://github.com/fenthope)
 
 ## 🤝 Contributing
 

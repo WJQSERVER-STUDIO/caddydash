@@ -24,7 +24,7 @@ CaddyDash 是一个现代化、用户友好的 Web 界面，用于管理和配�
 **后端:**
 
 *   **Go 语言**: 高性能、并发友好的后端服务
-*   **Touka 框架**: 基于 Go 构建的 HTTP 框架，用于处理 Web 请求
+*   **Touka 框架**: [Touka](https://github.com/infinite-iroha/touka)高效多层次的HTTP框架
 *   **SQLite**: 轻量级嵌入式数据库，用于存储用户和配置数据
 *   **CaddyServer**: 作为核心组件
 
@@ -78,6 +78,18 @@ CaddyDash 前端支持多语言显示。
 1.  在 `locales/en.json` 和 `locales/zh-CN.json` 中添加新的键值对。请遵循现有的点分隔命名约定（例如 `pages.feature.new_text`）。
 2.  在 HTML 中使用 `data-i18n="your.new.key"`、`data-i18n-title="your.new.key"` 或 `data-i18n-placeholder="your.new.key"` 属性。
 3.  在 JavaScript 代码中，使用 `t('your.new.key', { replacements })` 函数来获取翻译文本。
+
+## 相关项目
+
+### 核心
+
+[Caddy官方仓库](https://github.com/caddyserver/caddy)
+
+### 后端
+
+[Touka框架](https://github.com/infinite-iroha/touka)
+[SQLite驱动](https://modernc.org/sqlite)
+[Touka中间件...](https://github.com/fenthope)
 
 ## 🤝 贡献
 
