@@ -16,6 +16,7 @@ import (
 	"time"
 
 	"github.com/fenthope/compress"
+	"github.com/fenthope/reco"
 	"github.com/fenthope/record"
 	"github.com/fenthope/sessions"
 	"github.com/fenthope/sessions/cookie"
@@ -118,6 +119,20 @@ func main() {
 	defer cdb.CloseDB()
 
 	r := touka.Default()
+	logger, err := reco.New(reco.Config{
+		Level:          reco.LevelInfo,
+		Mode:           reco.ModeText,
+		FilePath:       cfg.Server.CaddyDir + "log/caddydash.log",
+		MaxFileSizeMB:  5,
+		EnableRotation: true,
+		Async:          true,
+	})
+	if err != nil {
+		fmt.Printf("Failed to initialize logger: %v\n", err)
+		os.Exit(1)
+	}
+	defer logger.Close()
+	r.SetLogger(logger)
 	r.Use(record.Middleware())
 
 	r.Use(compress.Compression(compress.CompressOptions{

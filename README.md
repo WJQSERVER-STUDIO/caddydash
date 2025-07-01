@@ -36,7 +36,34 @@ CaddyDash 前端采用**多页面应用 (MPA)** 架构，每个主要功能模�
 *   **共享组件**: `js/common.js`、`js/locale.js`、`js/notifications.js`、`js/ui.js`、`js/api.js` 等模块封装了跨页面共享的功能，如页面初始化、国际化、通知、UI操作和后端 API 调用。
 *   **独立页面逻辑**: `js/app.js` (站点配置), `js/global.js` (全局配置), `js/settings.js` (面板设置), `js/login.js` (登录), `js/init.js` (初始化) 分别处理各自页面的特定业务逻辑。
 
+## 部署
 
+推荐使用docker compose部署
+
+```yml
+version: '3.8'
+
+services:
+  caddydash:
+    image: wjqserver/caddydash:latest
+    container_name: caddydash
+    network_mode: host # 使用宿主机网络模式
+
+    # 映射宿主机目录到容器内部，用于持久化数据和配置
+    volumes:
+      # CaddyDash 的配置目录，包含 config.toml
+      - ./config:/data/caddy/config
+      # Caddy 的额外配置文件片段目录
+      - ./config.d:/data/caddy/config.d
+      # 日志目录
+      - ./log:/data/caddy/log
+      # CaddyDash 的数据库文件
+      - ./db:/data/caddy/db
+      # Caddy 自身的内部数据目录（如证书存储），Caddy Dash 可能会管理此处
+      - ./caddy_internal_data:/root/.local/share/caddy # Caddy 默认数据目录之一
+    
+    restart: unless-stopped
+```
 
 ## 🌐 国际化 (i18n)
 
