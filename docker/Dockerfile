@@ -13,7 +13,7 @@ RUN mkdir -p /data/caddy/config.d
 RUN mkdir -p /usr/local/bin
 
 # 下载并解压caddy
-RUN VERSION=$(curl -s https://raw.githubusercontent.com/WJQSERVER/caddy/main/VERSION) && \
+RUN VERSION=$(curl -s https://raw.githubusercontent.com/WJQSERVER/caddy/main/TEST-VERSION) && \
     echo "VERSION: ${VERSION}" && \
     wget -O /data/caddy/caddy.tar.gz https://github.com/WJQSERVER/caddy/releases/download/${VERSION}/caddy-${TARGETOS}-${TARGETARCH}-pages.tar.gz
 RUN tar -xzvf /data/caddy/caddy.tar.gz -C /data/caddy 
