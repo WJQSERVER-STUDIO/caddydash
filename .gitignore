@@ -1,0 +1,6 @@
+pages
+log
+*.db
+caddy
+caddydash
+config.d

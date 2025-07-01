@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="pages.init.page_title">首次设置 - CaddyDash</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="login-page-body">
+    <div class="login-container">
+        <header class="login-header">
+            <i class="fa-solid fa-magic-wand-sparkles"></i>
+            <h1 data-i18n="pages.init.title">欢迎使用 CaddyDash</h1>
+            <p data-i18n="pages.init.prompt">请创建您的管理员账户以完成首次设置</p>
+        </header>
+
+        <form id="init-form">
+            <div class="form-group">
+                <label for="username" data-i18n="pages.init.admin_user_label">管理员用户名</label>
+                <input type="text" id="username" name="username" required autocomplete="username">
+            </div>
+            <div class="form-group">
+                <label for="password" data-i18n="pages.init.password_label">密码 (至少8位)</label>
+                <input type="password" id="password" name="password" required minlength="8" autocomplete="new-password">
+            </div>
+            <div class="form-group">
+                <label for="confirm_password" data-i18n="pages.init.confirm_password_label">确认密码</label>
+                <input type="password" id="confirm_password" name="confirm_password" required minlength="8" autocomplete="new-password">
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-login">
+                <span data-i18n="pages.init.setup_btn">完成设置</span>
+                <i class="fa-solid fa-check"></i>
+            </button>
+        </form>
+    </div>
+    
+    <div class="language-switcher-corner">
+        <button id="lang-switcher-btn" class="btn-icon" data-i18n-title="common.switch_language">
+            <i class="fa-solid fa-language"></i>
+        </button>
+        <ul id="lang-options-list" class="hidden"></ul>
+    </div>
+
+    <div id="toast-container" class="toast-container"></div>
+    <script type="module" src="js/init.js"></script>
+</body>
+</html>

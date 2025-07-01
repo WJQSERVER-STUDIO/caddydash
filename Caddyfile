@@ -1,0 +1,95 @@
+{
+	admin localhost:2019
+	http_port 80
+	https_port 443
+	metrics
+
+	order ja4h_header first
+	order webdav before file_server
+	order cache before rewrite
+
+	cache {
+		cache_name CaddyCache
+	}
+
+	log {
+		level INFO
+		output file ./log/caddy.log {
+			roll_size 10MB
+			roll_keep 10
+			roll_keep_for 24h
+		}
+	}
+}
+
+(log) {
+	log {
+		format transform `{request>headers>X-Forwarded-For>[0]:request>remote_ip} - {user_id} [{ts}] "{request>method} {request>uri} {request>proto}" {status} {size} "{request>headers>Referer>[0]}" "{request>headers>User-Agent>[0]}"` {
+			time_format "02/Jan/2006:15:04:05 -0700"
+		}
+		output file ./log/{args[0]}/access.log {
+			roll_size 10MB
+			roll_keep 10
+			roll_keep_for 24h
+		}
+	}
+}
+
+(error_page) {
+	handle_errors {
+		rewrite * /{err.status_code}.html
+		root * ./pages/errors
+		file_server
+	}
+}
+
+(encode) {
+	encode {
+		zstd
+		br
+		gzip
+		minimum_length 512
+	}
+}
+
+(cache) {
+	cache {
+		allowed_http_verbs GET
+		stale {args[0]}
+		ttl {args[1]}
+	}
+}
+
+(header_realip_cf) {
+	header_up X-Real-IP {remote_host}
+	header_up X-Real-IP {http.request.header.CF-Connecting-IP}
+	header_up X-Forwarded-For {http.request.header.CF-Connecting-IP}
+	header_up X-Forwarded-Proto {http.request.header.CF-Visitor}
+}
+
+(header_realip) {
+	header_up X-Real-IP {remote_host}
+	header_up X-Forwarded-For {remote_host}
+	header_up X-Forwarded-Proto {scheme}
+}
+
+(tls) {
+}
+
+(rate_limit) {
+	route /* {
+		rate_limit {remote.ip} {args[0]}r/m 10000 429
+	}
+}
+
+(route_nocache) {
+	route {args[0]} {
+		rate_limit {remote.ip} {args[1]}r/m 10000 429
+		cache {
+			stale 0s
+			ttl 0s
+		}
+	}
+}
+
+import ./config.d/*

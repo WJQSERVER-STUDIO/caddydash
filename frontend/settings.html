@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="pages.settings.page_title">面板设置 - CaddyDash</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <header class="sidebar-header">
+                <i class="fa-solid fa-rocket"></i>
+                <h1>CaddyDash</h1>
+            </header>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="/" data-nav-id="configs"><i class="fa-solid fa-sitemap"></i> <span
+                                data-i18n="nav.configs">配置管理</span></a></li>
+                    <li><a href="/global.html" data-nav-id="global"><i class="fa-solid fa-globe"></i>
+                            <span data-i18n="nav.global">全局配置</span></a></li>
+                    <li><a href="/settings.html" data-nav-id="settings"><i class="fa-solid fa-gears"></i>
+                            <span data-i18n="nav.settings">面板设置</span></a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-bottom">
+                <div class="theme-switcher"><i class="fa-solid fa-sun"></i><label class="switch"><input type="checkbox"
+                            id="theme-toggle-input"><span class="slider"></span></label><i class="fa-solid fa-moon"></i>
+                </div>
+                <div class="caddy-control-panel">
+                    <div id="caddy-status-indicator" class="caddy-status"><span class="status-dot checking"></span><span
+                            class="status-text" data-i18n="status.checking">检查中...</span></div>
+                    <div id="caddy-action-button-container"></div>
+                </div>
+                <div class="logout-section"><button id="logout-btn" class="btn btn-secondary"><i
+                            class="fa-solid fa-right-from-bracket"></i><span data-i18n="nav.logout">退出登录</span></button></div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <button class="btn-icon" id="menu-toggle-btn"><i class="fa-solid fa-bars"></i></button>
+                <h2 data-i18n="pages.settings.title">面板设置</h2>
+            </header>
+
+            <div id="view-container">
+                <section class="card-panel">
+                    <h3 data-i18n="pages.settings.interface_settings_title">界面设置</h3>
+                    <div class="form-group" style="margin-top: 16px;">
+                        <label for="select-language" data-i18n="pages.settings.language_label">语言</label>
+                        <div id="select-language" class="custom-select"></div>
+                    </div>
+                </section>
+                <section class="card-panel">
+                    <h3 data-i18n="pages.settings.account_security_title">账户安全</h3>
+                    <form id="reset-password-form" style="margin-top: 24px;">
+                        <div class="form-group">
+                            <label for="username" data-i18n="pages.login.username_label">用户名</label>
+                            <input type="text" id="username" name="username" autocomplete="username">
+                        </div>
+                        <div class="form-group">
+                            <label for="old_password" data-i18n="pages.settings.current_password_label">当前密码</label>
+                            <input type="password" id="old_password" name="old_password"
+                                autocomplete="current-password">
+                        </div>
+                        <div class="form-group">
+                            <label for="new_password" data-i18n="pages.settings.new_password_label">新密码 (至少8位)</label>
+                            <input type="password" id="new_password" name="new_password" autocomplete="new-password">
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm_new_password" data-i18n="pages.settings.confirm_new_password_label">确认新密码</label>
+                            <input type="password" id="confirm_new_password" name="confirm_new_password"
+                                autocomplete="new-password">
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-key"></i>
+                                <span data-i18n="pages.settings.reset_password_btn">重置密码</span></button>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <div id="toast-container" class="toast-container"></div>
+    <div id="dialog-container"></div>
+    <div id="modal-container"></div> <!-- 模态框容器也应在此页面存在，因为notifications.js会用到 -->
+
+    <script type="module" src="js/common.js"></script>
+    <script type="module" src="js/settings.js"></script>
+</body>
+
+</html>

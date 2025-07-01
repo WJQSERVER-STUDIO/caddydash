@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="pages.configs.page_title">CaddyDash</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <header class="sidebar-header">
+                <i class="fa-solid fa-rocket"></i>
+                <h1>CaddyDash</h1>
+            </header>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="/" data-nav-id="configs" class="active"><i class="fa-solid fa-sitemap"></i> <span
+                                data-i18n="nav.configs">站点配置</span></a></li>
+                    <li><a href="/global.html" data-nav-id="global"><i class="fa-solid fa-globe"></i> <span
+                                data-i18n="nav.global">全局配置</span></a></li>
+                    <li><a href="/settings.html" data-nav-id="settings"><i class="fa-solid fa-gears"></i> <span
+                                data-i18n="nav.settings">面板设置</span></a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-bottom">
+                <div class="theme-switcher"><i class="fa-solid fa-sun"></i><label class="switch"><input type="checkbox"
+                            id="theme-toggle-input"><span class="slider"></span></label><i class="fa-solid fa-moon"></i>
+                </div>
+                <div class="caddy-control-panel">
+                    <div id="caddy-status-indicator" class="caddy-status"><span class="status-dot checking"></span><span
+                            class="status-text" data-i18n="status.checking">检查中...</span></div>
+                    <div id="caddy-action-button-container"></div>
+                </div>
+                <div class="logout-section"><button id="logout-btn" class="btn btn-secondary"><i
+                            class="fa-solid fa-right-from-bracket"></i><span
+                            data-i18n="nav.logout">退出登录</span></button></div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <button class="btn-icon" id="menu-toggle-btn"><i class="fa-solid fa-bars"></i></button>
+                <h2 data-i18n="pages.configs.title">站点配置管理</h2>
+                <button id="add-new-config-btn" class="btn btn-primary"><i class="fa-solid fa-plus"></i> <span
+                        class="btn-text" data-i18n="pages.configs.add_new_btn">创建新配置</span></button>
+            </header>
+
+            <div id="view-container">
+                <section id="config-list-panel" class="card-panel view">
+                    <ul id="config-list" class="config-list-container"></ul>
+                </section>
+                <section id="config-form-panel" class="card-panel view hidden">
+                    <div class="form-panel-header">
+                        <button id="back-to-list-btn" class="btn-icon" title="返回列表"
+                            data-i18n-title="common.back_to_list"><i class="fa-solid fa-arrow-left"></i></button>
+                        <h3 id="form-title" data-i18n="pages.configs.form_title_create">创建新配置</h3>
+                    </div>
+                    <form id="config-form">
+                        <input type="hidden" id="original-filename" value="">
+
+                        <fieldset>
+                            <legend data-i18n="form.legend_basic">基础配置</legend>
+                            <div class="form-group">
+                                <label for="domain" data-i18n="form.domain_label">主域名 (将用作文件名)</label>
+                                <input type="text" id="domain" name="domain">
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend data-i18n="form.legend_service_mode">服务模式</legend>
+                            <div id="service-mode-control" class="segmented-control">
+                                <div id="segmented-control-slider"></div>
+                                <button type="button" data-mode="none" class="active"
+                                    data-i18n="form.mode_none">无</button>
+                                <button type="button" data-mode="reverse_proxy"
+                                    data-i18n="form.mode_rp">反向代理</button>
+                                <button type="button" data-mode="file_server"
+                                    data-i18n="form.mode_fs">文件服务</button>
+                            </div>
+                        </fieldset>
+
+                        <fieldset id="upstream-fieldset" class="hidden">
+                            <legend data-i18n="form.legend_rp">反向代理配置</legend>
+                            <div class="form-group" id="single-upstream-group">
+                                <label for="upstream" data-i18n="form.upstream_addr_label">上游服务地址</label>
+                                <input type="text" id="upstream" name="upstream" placeholder="例如: 127.0.0.1:8080"
+                                    data-i18n-placeholder="form.upstream_addr_placeholder">
+                            </div>
+                            <div class="sub-fieldset">
+                                <label class="custom-checkbox">
+                                    <input type="checkbox" id="muti_upstream" name="muti_upstream">
+                                    <span class="checkmark"></span> <span
+                                        data-i18n="form.enable_multi_upstream">启用多上游负载均衡</span>
+                                </label>
+                                <div id="multi-upstream-group" class="hidden" style="margin-top: 16px;">
+                                    <p class="sub-legend" data-i18n="form.upstream_servers_label">上游服务器列表</p>
+                                    <div id="multi-upstream-container"></div>
+                                    <button type="button" id="add-multi-upstream-btn"
+                                        class="btn btn-secondary btn-small"><i class="fa-solid fa-plus"></i> <span
+                                            data-i18n="form.add_upstream_server_btn">添加上游服务器</span></button>
+                                </div>
+                            </div>
+                            <div class="sub-fieldset">
+                                <div class="sub-legend-group">
+                                    <p class="sub-legend" data-i18n="form.upstream_headers_label">上游请求头 (Upstream
+                                        Headers)</p>
+                                    <button type="button" class="btn-link" data-preset-target="upstream">
+                                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                                        <span data-i18n="form.fill_from_preset">从预设填充</span>
+                                    </button>
+                                </div>
+                                <div id="upstream-headers-container"></div>
+                                <button type="button" class="btn btn-secondary btn-small" data-add-target="upstream">
+                                    <i class="fa-solid fa-plus"></i> <span data-i18n="form.add_header_btn">添加请求头</span>
+                                </button>
+                            </div>
+                        </fieldset>
+
+                        <fieldset id="fileserver-fieldset" class="hidden">
+                            <legend data-i18n="form.legend_fs">文件服务配置</legend>
+                            <div class="form-group">
+                                <label for="file_dir_path" data-i18n="form.fs_root_label">根目录路径</label>
+                                <input type="text" id="file_dir_path" name="file_dir_path" placeholder="例如: /srv/www"
+                                    data-i18n-placeholder="form.fs_root_placeholder">
+                            </div>
+                            <label class="custom-checkbox">
+                                <input type="checkbox" id="enable_browser" name="enable_browser">
+                                <span class="checkmark"></span> <span
+                                    data-i18n="form.enable_fs_browser">启用文件浏览器</span>
+                            </label>
+                        </fieldset>
+
+                        <fieldset id="headers-fieldset">
+                            <div class="sub-legend-group">
+                                <legend data-i18n="form.legend_global_headers">全局请求头 (Headers)</legend>
+                                <button type="button" class="btn-link" data-preset-target="global">
+                                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                                    <span data-i18n="form.fill_from_preset">从预设填充</span>
+                                </button>
+                            </div>
+                            <div id="headers-container"></div>
+                            <button type="button" class="btn btn-secondary btn-small" data-add-target="global">
+                                <i class="fa-solid fa-plus"></i> <span data-i18n="form.add_header_btn">添加请求头</span>
+                            </button>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend data-i18n="form.legend_features">附加功能</legend>
+                            <div class="checkbox-grid">
+                                <label class="custom-checkbox"><input type="checkbox" id="enable_log"
+                                        name="enable_log"><span class="checkmark"></span> <span
+                                        data-i18n="form.feature_log">启用日志</span></label>
+                                <label class="custom-checkbox"><input type="checkbox" id="enable_error_page"
+                                        name="enable_error_page"><span class="checkmark"></span> <span
+                                        data-i18n="form.feature_error_page">启用错误页</span></label>
+                                <label class="custom-checkbox"><input type="checkbox" id="enable_encode"
+                                        name="enable_encode"><span class="checkmark"></span> <span
+                                        data-i18n="form.feature_encode">启用压缩</span></label>
+                            </div>
+                        </fieldset>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-save"></i> <span
+                                    data-i18n="common.save">保存配置</span></button>
+                            <button type="button" id="cancel-edit-btn" class="btn btn-secondary"
+                                data-i18n="common.cancel">取消</button>
+                        </div>
+                    </form>
+                </section>
+                <section id="rendered-output-panel" class="card-panel view hidden">
+                    <h3 data-i18n="pages.configs.rendered_caddyfile_title">渲染后的 Caddyfile</h3>
+                    <pre><code id="rendered-content"></code></pre>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <div id="toast-container" class="toast-container"></div>
+    <div id="dialog-container"></div>
+    <div id="modal-container"></div>
+
+    <script type="module" src="js/app.js"></script>
+</body>
+
+</html>

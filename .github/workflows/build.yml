@@ -1,0 +1,141 @@
+name: Build
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'main'
+    paths:
+      - 'VERSION'
+
+jobs:
+  prepare:
+    runs-on: ubuntu:latest
+    steps:
+      - uses: actions/checkout@v4
+        with: 
+          ref: main
+      - name: 加载版本号
+        run: |
+          if [ -f VERSION ]; then
+            echo "VERSION=$(cat VERSION)" >> $GITHUB_ENV
+          else
+            echo "VERSION file not found!" && exit 1
+          fi
+      - name: 输出版本号
+        run: | 
+          echo "Version: ${{ env.VERSION }}"
+      - name: 预先创建release
+        id: create_release
+        uses: ncipollo/release-action@v1
+        with:
+          name: ${{ env.VERSION }}
+          artifacts: ./VERSION
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ env.VERSION }}
+          allowUpdates: true
+          body: ${{ env.VERSION }}
+        env:
+          export PATH: $PATH:/usr/local/go/bin
+
+  build:
+    runs-on: ubuntu:latest
+    needs: prepare  # 确保这个作业在 prepare 作业完成后运行
+    strategy:
+      matrix:
+        goos: [linux, darwin, freebsd]
+        goarch: [amd64, arm64]
+    env:
+      OUTPUT_BINARY: caddydash
+      GO_VERSION: 1.24
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: 加载版本号
+        run: |
+          if [ -f VERSION ]; then
+            echo "VERSION=$(cat VERSION)" >> $GITHUB_ENV
+          else
+            echo "VERSION file not found!" && exit 1
+          fi
+          
+      - name: 安装 Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: ${{ env.GO_VERSION }}
+      - name: 编译
+        env:
+          GOOS: ${{ matrix.goos }}
+          GOARCH: ${{ matrix.goarch }}
+        run: |
+          CGO_ENABLED=0 go build -ldflags "-s -w -X main.version=${{ env.VERSION }}" -o ${{ env.OUTPUT_BINARY }}-${{matrix.goos}}-${{matrix.goarch}} ./main.go
+      - name: 打包
+        run: |
+          mkdir caddydashd
+          cp ${{ env.OUTPUT_BINARY }}-${{matrix.goos}}-${{matrix.goarch}} ./caddydashd/
+          mv ./caddydashd/${{ env.OUTPUT_BINARY }}-${{matrix.goos}}-${{matrix.goarch}} ./caddydashd/${{ env.OUTPUT_BINARY }}
+          cp LICENSE ./caddydashd/
+          tar -czf ${{ env.OUTPUT_BINARY }}-${{matrix.goos}}-${{matrix.goarch}}.tar.gz -C caddydashd .
+      - name: 上传Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.OUTPUT_BINARY }}-${{matrix.goos}}-${{matrix.goarch}}
+          path: |
+            ./${{ env.OUTPUT_BINARY }}*          
+      - name: 上传至Release
+        id: create_release
+        uses: ncipollo/release-action@v1
+        with:
+          name: ${{ env.VERSION }}
+          artifacts: ./${{ env.OUTPUT_BINARY }}-${{matrix.goos}}-${{matrix.goarch}}.tar.gz
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ env.VERSION }}
+          allowUpdates: true
+          body: ${{ env.VERSION }}
+        env:
+          export PATH: $PATH:/usr/local/go/bin
+
+  docker:
+    runs-on: ubuntu-latest
+    needs: build  # 确保这个作业在 build 作业完成后运行
+    env:
+      IMAGE_NAME: wjqserver/caddydash  # 定义镜像名称变量
+      DOCKERFILE: docker/Dockerfile  # 定义 Dockerfile 路径变量
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Load VERSION
+        run: |
+          if [ -f VERSION ]; then
+            echo "VERSION=$(cat VERSION)" >> $GITHUB_ENV
+          else
+            echo "VERSION file not found!" && exit 1
+          fi
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: 构建镜像
+        uses: docker/build-push-action@v6
+        with:
+          file: ./${{ env.DOCKERFILE }}
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: | 
+            ${{ env.IMAGE_NAME }}:${{ env.VERSION }}
+            ${{ env.IMAGE_NAME }}:v0
+            ${{ env.IMAGE_NAME }}:latest

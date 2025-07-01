@@ -1,0 +1,20 @@
+{{.Domain}} {
+    reverse_proxy {
+        to {{.ReverseProxy}}
+        {{- range .HeadersUp}}
+        header_up {{.}}
+        {{- end}}
+    }
+    {{- range .HeadersUp}}
+    header {{.}}
+    {{- end}}
+    {{- if .EnableLog}}
+    import log {{.LogDomain}}
+    {{- end}}
+    {{- if .EnableErrorPage}}
+    import error_page
+    {{- end}}
+    {{- if .EnableEncode}}
+    import encode
+    {{- end}}
+}

@@ -1,0 +1,16 @@
+{{.Domain}} {
+	root * {{.FileDirPath}}
+    file_server{{if .EnableBrowser}} browse{{end}}
+    {{- range .Headers}}
+    header {{.}}
+    {{- end}}
+    {{- if .EnableLog}}
+    import log {{.LogDomain}}
+    {{- end}}
+    {{- if .EnableErrorPage}}
+    import error_page
+    {{- end}}
+    {{- if .EnableEncode}}
+    import encode
+    {{- end}}
+}

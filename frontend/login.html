@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="pages.login.page_title">登录 - CaddyDash</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="login-page-body">
+
+    <div class="login-container">
+        <header class="login-header">
+            <i class="fa-solid fa-rocket"></i>
+            <h1 data-i18n="pages.login.welcome">欢迎使用 CaddyDash</h1>
+            <p data-i18n="pages.login.prompt">请输入您的凭证以继续</p>
+        </header>
+
+        <form id="login-form">
+            <div class="form-group">
+                <label for="username" data-i18n="pages.login.username_label">用户名</label>
+                <input type="text" id="username" name="username" autocomplete="username">
+            </div>
+            <div class="form-group">
+                <label for="password" data-i18n="pages.login.password_label">密码</label>
+                <input type="password" id="password" name="password" autocomplete="current-password">
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-login">
+                <span data-i18n="pages.login.login_btn">登录</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </form>
+    </div>
+
+    <!-- 新增: 语言切换器 -->
+    <div class="language-switcher-corner">
+        <button id="lang-switcher-btn" class="btn-icon" data-i18n-title="common.switch_language" title="切换语言">
+            <i class="fa-solid fa-language"></i>
+        </button>
+        <!-- 语言选项列表, 默认隐藏 -->
+        <ul id="lang-options-list" class="hidden">
+            <!-- JS 动态填充 -->
+        </ul>
+    </div>
+
+    <div id="toast-container" class="toast-container"></div>
+    <script type="module" src="js/login.js"></script>
+</body>
+
+</html>

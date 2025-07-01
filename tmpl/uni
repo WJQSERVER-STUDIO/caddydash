@@ -1,0 +1,42 @@
+{{- if .DomainConfig.MutiDomains -}}
+	{{- range $i, $domain := .DomainConfig.Domains -}}
+		{{- if $i}} {{" "}}{{- end -}}
+		{{- . -}}
+	{{- end -}} {
+{{- else -}}
+	{{- .DomainConfig.Domain}} {
+{{- end -}}
+
+	{{- if .Upstream.EnableUpStream}}
+	reverse_proxy {
+		to{{if .Upstream.MutiUpStreams}}{{range .Upstream.UpStreams}} {{.}}{{end}}{{else}} {{.Upstream.UpStream}}{{end}}
+
+		{{- range $key, $values := .Upstream.UpStreamHeaders}}
+			{{- range $values}}
+		header_up {{$key}} "{{.}}"
+			{{- end}}
+		{{- end}}
+	}
+	{{- else if .FileServer.EnableFileServer}}
+	root * {{.FileServer.FileDirPath}}
+	file_server{{if .FileServer.EnableBrowser}} browse{{end}}
+	{{- end}}
+
+	{{- range $key, $values := .Headers}}
+		{{- range $values}}
+	header {{$key}} "{{.}}"
+		{{- end}}
+	{{- end}}
+
+	{{- if .Log.EnableLog}}
+	import log {{.Log.LogDomain}}
+	{{- end}}
+
+	{{- if .ErrorPage.EnableErrorPage}}
+	import error_page
+	{{- end}}
+
+	{{- if .Encode.EnableEncode}}
+	import encode
+	{{- end}}
+}
