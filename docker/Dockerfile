@@ -22,7 +22,7 @@ RUN chmod +x /data/caddy/caddy
 
 RUN DASHVERSION=$(curl -s https://raw.githubusercontent.com/WJQSERVER-STUDIO/caddydash/main/VERSION) && \
     echo "VERSION: ${DASHVERSION}" && \
-    wget -O /data/caddy/caddydash.tar.gz https://github.com/WJQSERVER-STUDIO/caddydash/releases/download/${DASHVERSION}/caddy-${TARGETOS}-${TARGETARCH}-pages.tar.gz
+    wget -O /data/caddy/caddydash.tar.gz https://github.com/WJQSERVER-STUDIO/caddydash/releases/download/${DASHVERSION}/caddydash-${TARGETOS}-${TARGETARCH}.tar.gz
 RUN tar -xzvf /data/caddy/caddydash.tar.gz -C /data/caddy 
 RUN rm /data/caddy/caddydash.tar.gz 
 RUN chmod +x /data/caddy/caddydash
