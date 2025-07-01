@@ -42,7 +42,6 @@ COPY tmpl /data/caddy/
 
 # 复制构建阶段的文件
 COPY --from=BUILD /data/caddy /data/caddy
-COPY --from=BUILD /usr/local/bin/init.sh /usr/local/bin/init.sh
 
 # 配置权限
 RUN chmod +x /data/caddy/caddy 
