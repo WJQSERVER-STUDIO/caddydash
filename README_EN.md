@@ -36,6 +36,35 @@ CaddyDash frontend adopts a **Multi-Page Application (MPA)** architecture, where
 *   **Shared Components**: Modules like `js/common.js`, `js/locale.js`, `js/notifications.js`, `js/ui.js`, `js/api.js` encapsulate functionalities shared across pages, such as page initialization, internationalization, notifications, UI operations, and backend API calls.
 *   **Independent Page Logic**: `js/app.js` (site configuration), `js/global.js` (global configuration), `js/settings.js` (panel settings), `js/login.js` (login), `js/init.js` (initialization) handle their respective page-specific business logic.
 
+## Deployment
+
+Recommended to deploy using Docker Compose.
+
+```yml
+version: '3.8'
+
+services:
+  caddydash:
+    image: wjqserver/caddydash:latest
+    container_name: caddydash
+    network_mode: host # Use host network mode
+
+    # Map host directories to container for persistent data and configuration
+    volumes:
+      # CaddyDash configuration directory, contains config.toml
+      - ./config:/data/caddy/config
+      # Caddy's additional configuration snippets directory
+      - ./config.d:/data/caddy/config.d
+      # Log directory
+      - ./log:/data/caddy/log
+      # CaddyDash database file
+      - ./db:/data/caddy/db
+      # Caddy's internal data directory (e.g., certificate storage), which CaddyDash might manage
+      - ./caddy_internal_data:/root/.local/share/caddy
+    
+    restart: unless-stopped
+```
+
 ## 🌐 Internationalization (i18n)
 
 CaddyDash frontend supports multi-language display.
