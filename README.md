@@ -91,6 +91,10 @@ CaddyDash 前端支持多语言显示。
 [SQLite驱动](https://modernc.org/sqlite)
 [Touka中间件...](https://github.com/fenthope)
 
+## 关于
+
+*   [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/WJQSERVER-STUDIO/caddydash) 可供参考, AI生成存在幻觉, 不完全可靠, 请注意辨别
+
 ## 🤝 贡献
 
 我们欢迎并鼓励任何形式的贡献！如果您有任何功能建议、bug 报告或代码改进，请随时通过 Issues 或 Pull Requests 提交。
