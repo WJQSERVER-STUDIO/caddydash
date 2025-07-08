@@ -67,6 +67,12 @@ function applyTranslationsToDOM() {
  * @returns {string} - 翻译后的字符串
  */
 export function t(key, replacements = {}) {
+
+    // 如果 key 不是一个字符串, 或者为空字符串, 直接返回它本身或一个空字符串, 防止后续操作崩溃.
+    if (typeof key !== 'string' || !key) {
+        return key || '';
+    }
+
     // 通过路径 'a.b.c' 在嵌套对象中查找值: currentLocale['a']['b']['c']
     const translation = key.split('.').reduce((obj, k) => obj && obj[k], currentLocale);
 

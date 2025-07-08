@@ -26,6 +26,28 @@
         "loading": "加载中...",
         "logout": "退出登录"
     },
+    "presets": {
+        "real_ip_cloudflare": {
+            "name": "Cloudflare 真实IP",
+            "description": "添加从 Cloudflare 获取真实客户端 IP 所需的请求头。适用于通过 Cloudflare 代理的流量。"
+        },
+        "real_ip_direct": {
+            "name": "真实IP (直接)",
+            "description": "当 Caddy 直接暴露在互联网上时，使用此预设获取客户端真实 IP。"
+        },
+        "real_ip_intermediate": {
+            "name": "真实IP (中间层)",
+            "description": "当 Caddy 位于反向代理或负载均衡器之后时，使用此预设获取客户端真实 IP。"
+        },
+        "common_security_headers": {
+            "name": "通用安全响应头",
+            "description": "添加一系列推荐的 HTTP 安全头以增强站点安全性 (HSTS, X-Frame-Options 等)。"
+        },
+        "cors_allow_all": {
+            "name": "CORS (允许所有来源)",
+            "description": "添加允许所有来源跨域请求的响应头。警告：生产环境请谨慎使用。"
+        }
+    },
     "pages": {
         "configs": {
             "page_title": "站点配置 - CaddyDash",

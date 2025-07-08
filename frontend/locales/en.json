@@ -26,6 +26,28 @@
         "loading": "Loading...",
         "logout": "Logout"
     },
+    "presets": {
+        "real_ip_cloudflare": {
+            "name": "Cloudflare Real IP",
+            "description": "Adds headers to get the real client IP for traffic proxied through Cloudflare."
+        },
+        "real_ip_direct": {
+            "name": "Real IP (Direct)",
+            "description": "Use this preset to get the client's real IP when Caddy is directly exposed to the internet."
+        },
+        "real_ip_intermediate": {
+            "name": "Real IP (Intermediate Layer)",
+            "description": "Use this preset to get the client's real IP when Caddy is behind a reverse proxy or load balancer."
+        },
+        "common_security_headers": {
+            "name": "Common Security Headers",
+            "description": "Adds a set of recommended HTTP security headers to enhance site security (HSTS, X-Frame-Options, etc.)."
+        },
+        "cors_allow_all": {
+            "name": "CORS (Allow All Origins)",
+            "description": "Adds headers to allow cross-origin requests from all sources. Warning: Use with caution in production."
+        }
+    },
     "pages": {
         "configs": {
             "page_title": "Site Configs - CaddyDash",

@@ -77,6 +77,12 @@ func ApiGroup(v0 touka.IRouter, cdb *db.ConfigDB, cfg *config.Config, version st
 		auth.POST("/init", AuthInitHandle(cdb))
 		auth.POST("resetpwd", ResetPassword(cdb))
 	}
+
+	// 运行时相关
+	rtr := api.Group("/runtime")
+	{
+		rtr.GET("/", runtimeInfo())
+	}
 }
 
 // GetTemplates 获取可用的tmpls name

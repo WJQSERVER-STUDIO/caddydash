@@ -190,12 +190,41 @@ export function createPresetSelectionModal(presets) {
     return new Promise(resolve => {
         const modalContainer = DOMElements.modalContainer;
         if (!modalContainer) return resolve(null);
+
+       const presetItems = presets.map(p => {
+            // 根据规则构建 i18n 键
+            const nameKey = `presets.${p.id}.name`;
+            const descKey = `presets.${p.id}.description`;
+
+            // 使用 t() 函数进行翻译.
+            //    - 如果找到了翻译, t() 会返回翻译后的文本.
+            //    - 如果找不到, t() 会原样返回 nameKey.
+            const displayName = t(nameKey);
+            const displayDesc = t(descKey);
+
+            // 设计回退逻辑:
+            //    - 如果翻译结果和 key 相同, 说明没找到翻译, 此时使用后端返回的 p.name.
+            //    - 否则, 使用翻译结果.
+            const finalName = (displayName === nameKey) ? p.name : displayName;
+            const finalDesc = (displayDesc === descKey) ? p.description : displayDesc;
+
+            return `
+                <li data-preset-id="${p.id}">
+                    <strong>${finalName}</strong>
+                    <p>${finalDesc}</p>
+                </li>
+            `;
+        }).join('');
+
+        /*
         const presetItems = presets.map(p => `
             <li data-preset-id="${p.id}">
                 <strong>${t(p.name_key) || p.name}</strong>
                 <p>${t(p.desc_key) || p.description}</p>
             </li>
         `).join('');
+        */
+
         const modalHTML = `
             <div class="modal-overlay"></div>
             <div class="modal-box">

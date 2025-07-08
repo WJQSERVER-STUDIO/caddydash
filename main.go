@@ -139,8 +139,8 @@ func main() {
 		// Algorithms: 配置每种压缩算法的级别和是否启用对象池
 		Algorithms: map[string]compress.AlgorithmConfig{
 			compress.EncodingGzip: {
-				Level:       -1,   // Gzip最高压缩比
-				PoolEnabled: true, // 启用Gzip压缩器的对象池
+				Level:       -1,
+				PoolEnabled: true,
 			},
 			compress.EncodingDeflate: {
 				Level:       -1,    // Deflate默认压缩比

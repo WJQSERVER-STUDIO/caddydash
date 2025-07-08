@@ -169,7 +169,8 @@ async function openPresetModal(targetType) {
                 addKeyValueInput(targetContainer, keyName, valueName, key, value);
             });
         });
-        notification.toast(t('toasts.preset_fill_success', { presetName: preset.name }), 'success');
+        const presetNameKey = `presets.${preset.id}.name`;
+        notification.toast(t('toasts.preset_fill_success', { presetName: t(presetNameKey) }), 'success');
 
     } catch (error) {
         notification.toast(t('toasts.load_preset_error', { error: error.message }), 'error');
