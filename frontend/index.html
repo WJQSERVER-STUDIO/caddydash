@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-i18n="pages.configs.page_title">CaddyDash</title>
+    <meta name="description" content="CaddyDash - A Simple Caddy Manager WebUI">
+    <meta name="keywords" content="Caddy, Caddy Server, Web Server, Administration Panel, Manager, Configuration, Proxy">
+    <meta name="made-by" content="WJQSERVER-STUDIO">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -39,8 +42,8 @@
                     <div id="caddy-action-button-container"></div>
                 </div>
                 <div class="logout-section"><button id="logout-btn" class="btn btn-secondary"><i
-                            class="fa-solid fa-right-from-bracket"></i><span
-                            data-i18n="nav.logout">退出登录</span></button></div>
+                            class="fa-solid fa-right-from-bracket"></i><span data-i18n="nav.logout">退出登录</span></button>
+                </div>
             </div>
         </aside>
 
@@ -79,10 +82,8 @@
                                 <div id="segmented-control-slider"></div>
                                 <button type="button" data-mode="none" class="active"
                                     data-i18n="form.mode_none">无</button>
-                                <button type="button" data-mode="reverse_proxy"
-                                    data-i18n="form.mode_rp">反向代理</button>
-                                <button type="button" data-mode="file_server"
-                                    data-i18n="form.mode_fs">文件服务</button>
+                                <button type="button" data-mode="reverse_proxy" data-i18n="form.mode_rp">反向代理</button>
+                                <button type="button" data-mode="file_server" data-i18n="form.mode_fs">文件服务</button>
                             </div>
                         </fieldset>
 
@@ -132,8 +133,7 @@
                             </div>
                             <label class="custom-checkbox">
                                 <input type="checkbox" id="enable_browser" name="enable_browser">
-                                <span class="checkmark"></span> <span
-                                    data-i18n="form.enable_fs_browser">启用文件浏览器</span>
+                                <span class="checkmark"></span> <span data-i18n="form.enable_fs_browser">启用文件浏览器</span>
                             </label>
                         </fieldset>
 
@@ -163,6 +163,9 @@
                                 <label class="custom-checkbox"><input type="checkbox" id="enable_encode"
                                         name="enable_encode"><span class="checkmark"></span> <span
                                         data-i18n="form.feature_encode">启用压缩</span></label>
+                                <label class="custom-checkbox"><input type="checkbox" id="enable_tls_snippet"
+                                        name="enable_tls_snippet"><span class="checkmark"></span> <span
+                                        data-i18n="form.feature_tls_snippet">启用预设TLS片段</span></label>
                             </div>
                         </fieldset>
                         <div class="form-actions">

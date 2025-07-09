@@ -38,7 +38,8 @@
                     <div id="caddy-action-button-container"></div>
                 </div>
                 <div class="logout-section"><button id="logout-btn" class="btn btn-secondary"><i
-                            class="fa-solid fa-right-from-bracket"></i><span data-i18n="nav.logout">退出登录</span></button></div>
+                            class="fa-solid fa-right-from-bracket"></i><span data-i18n="nav.logout">退出登录</span></button>
+                </div>
             </div>
         </aside>
 
@@ -57,18 +58,23 @@
                         <fieldset>
                             <legend data-i18n="form.legend_general_options">通用选项</legend>
                             <div class="form-grid">
-                                <div class="form-group"><label for="admin_port" data-i18n="form.admin_api_port_label">管理API端口 (只读)</label><input type="text"
+                                <div class="form-group"><label for="admin_port"
+                                        data-i18n="form.admin_api_port_label">管理API端口 (只读)</label><input type="text"
                                         id="admin_port" name="admin_port" value=":2019" readonly></div>
-                                <div class="form-group"><label for="http_port" data-i18n="form.http_port_label">HTTP 端口</label><input type="number"
-                                        id="http_port" name="http_port" min="1" max="65535"></div>
-                                <div class="form-group"><label for="https_port" data-i18n="form.https_port_label">HTTPS 端口</label><input type="number"
-                                        id="https_port" name="https_port" min="1" max="65535"></div>
+                                <div class="form-group"><label for="http_port" data-i18n="form.http_port_label">HTTP
+                                        端口</label><input type="number" id="http_port" name="http_port" min="1"
+                                        max="65535"></div>
+                                <div class="form-group"><label for="https_port" data-i18n="form.https_port_label">HTTPS
+                                        端口</label><input type="number" id="https_port" name="https_port" min="1"
+                                        max="65535"></div>
                             </div>
                             <div class="checkbox-grid">
                                 <label class="custom-checkbox"><input type="checkbox" id="debug" name="debug"><span
-                                        class="checkmark"></span> <span data-i18n="form.enable_debug_mode">启用Debug模式</span></label>
+                                        class="checkmark"></span> <span
+                                        data-i18n="form.enable_debug_mode">启用Debug模式</span></label>
                                 <label class="custom-checkbox"><input type="checkbox" id="metrics" name="metrics"><span
-                                        class="checkmark"></span> <span data-i18n="form.enable_prometheus_metrics">启用Prometheus指标</span></label>
+                                        class="checkmark"></span> <span
+                                        data-i18n="form.enable_prometheus_metrics">启用Prometheus指标</span></label>
                             </div>
                         </fieldset>
 
@@ -78,33 +84,41 @@
                                 <div class="form-group"><label data-i18n="form.log_level_label">日志级别</label>
                                     <div id="select-log-level" class="custom-select"></div>
                                 </div>
-                                <div class="form-group"><label for="log_rotate_size" data-i18n="form.log_rotate_size_label">滚动大小</label><input type="text"
+                                <div class="form-group"><label for="log_rotate_size"
+                                        data-i18n="form.log_rotate_size_label">滚动大小</label><input type="text"
                                         id="log_rotate_size" name="log_rotate_size" placeholder="例如: 10MB"
                                         data-i18n-placeholder="form.log_rotate_size_placeholder"></div>
-                                <div class="form-group"><label for="log_rotate_keep" data-i18n="form.log_rotate_keep_label">保留文件数</label><input type="text"
+                                <div class="form-group"><label for="log_rotate_keep"
+                                        data-i18n="form.log_rotate_keep_label">保留文件数</label><input type="text"
                                         id="log_rotate_keep" name="log_rotate_keep" placeholder="例如: 10"
                                         data-i18n-placeholder="form.log_rotate_keep_placeholder"></div>
-                                <div class="form-group"><label for="log_rotate_keep_for_time" data-i18n="form.log_rotate_keep_for_time_label">保留时间</label><input
-                                        type="text" id="log_rotate_keep_for_time" name="log_rotate_keep_for_time"
-                                        placeholder="例如: 24h" data-i18n-placeholder="form.log_rotate_keep_for_time_placeholder"></div>
+                                <div class="form-group"><label for="log_rotate_keep_for_time"
+                                        data-i18n="form.log_rotate_keep_for_time_label">保留时间</label><input type="text"
+                                        id="log_rotate_keep_for_time" name="log_rotate_keep_for_time"
+                                        placeholder="例如: 24h"
+                                        data-i18n-placeholder="form.log_rotate_keep_for_time_placeholder"></div>
                             </div>
                         </fieldset>
 
                         <fieldset>
+                            <div class="form-group">
+                                <label for="tls_email" data-i18n="form.acme_email_label">ACME 邮箱</label>
+                                <input type="email" id="tls_email" name="tls_email" placeholder="用于证书申请和续订通知"
+                                    data-i18n-placeholder="form.acme_email_placeholder">
+                            </div>
                             <legend data-i18n="form.legend_global_tls_config">全局TLS配置 (ACME)</legend>
                             <label class="custom-checkbox"><input type="checkbox" id="enable_dns_challenge"
-                                    name="enable_dns_challenge"><span class="checkmark"></span> <span data-i18n="form.enable_global_dns_challenge">启用全局 DNS
-                                Challenge</span></label>
+                                    name="enable_dns_challenge"><span class="checkmark"></span> <span
+                                    data-i18n="form.enable_global_dns_challenge">启用全局 DNS
+                                    Challenge</span></label>
                             <div id="global-tls-config-group" class="hidden" style="margin-top:16px;">
                                 <div class="form-grid">
                                     <div class="form-group"><label data-i18n="form.dns_provider_label">DNS 提供商</label>
                                         <div id="select-tls-provider" class="custom-select"></div>
                                     </div>
-                                    <div class="form-group"><label for="tls_email" data-i18n="form.acme_email_label">ACME 邮箱</label><input type="email"
-                                            id="tls_email" name="tls_email" placeholder="用于证书申请和续订通知"
-                                            data-i18n-placeholder="form.acme_email_placeholder"></div>
-                                    <div class="form-group"><label for="tls_token" data-i18n="form.api_token_label">API Token (或等效凭证)</label><input
-                                            type="password" id="tls_token" name="tls_token" autocomplete="new-password">
+                                    <div class="form-group"><label for="tls_token" data-i18n="form.api_token_label">API
+                                            Token (或等效凭证)</label><input type="password" id="tls_token" name="tls_token"
+                                            autocomplete="new-password">
                                     </div>
                                 </div>
                             </div>
@@ -113,12 +127,14 @@
                         <fieldset>
                             <legend data-i18n="form.legend_ech_config">加密客户端问候 (ECH)</legend>
                             <label class="custom-checkbox"><input type="checkbox" id="enable_ech"
-                                    name="enable_ech"><span class="checkmark"></span> <span data-i18n="form.enable_ech_experimental">启用 ECH (实验性功能)</span></label>
+                                    name="enable_ech"><span class="checkmark"></span> <span
+                                    data-i18n="form.enable_ech_experimental">启用 ECH (实验性功能)</span></label>
                             <div id="ech-config-group" class="hidden" style="margin-top:16px;">
                                 <div class="form-group">
                                     <label for="tls_ech_sni" data-i18n="form.ech_outer_sni_label">ECH Outer SNI</label>
                                     <input type="text" id="tls_ech_sni" name="tls_ech_sni"
-                                        placeholder="例如: ech.example.com" data-i18n-placeholder="form.ech_outer_sni_placeholder">
+                                        placeholder="例如: ech.example.com"
+                                        data-i18n-placeholder="form.ech_outer_sni_placeholder">
                                 </div>
                             </div>
                         </fieldset>

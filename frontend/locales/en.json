@@ -94,7 +94,8 @@
             "confirm_password_label": "Confirm Password",
             "setup_btn": "Complete Setup",
             "setting_up_btn": "Setting up..."
-        }
+        },
+        "totaldesc": "A Simple Caddy Manager WebUI"
     },
     "form": {
         "legend_basic": "Basic Config",
@@ -122,6 +123,7 @@
         "feature_log": "Enable Logging",
         "feature_error_page": "Enable Custom Error Pages",
         "feature_encode": "Enable Compression",
+        "feature_tls_snippet": "Enable Preset TLS Snippet",
         "legend_general_options": "General Options",
         "admin_api_port_label": "Admin API Port (Read-only)",
         "http_port_label": "HTTP Port",

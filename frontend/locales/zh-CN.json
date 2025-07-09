@@ -94,7 +94,8 @@
             "confirm_password_label": "确认密码",
             "setup_btn": "完成设置",
             "setting_up_btn": "设置中..."
-        }
+        },
+        "totaldesc": "一个简单的 Caddy 管理面板"
     },
     "form": {
         "legend_basic": "基础配置",
@@ -122,6 +123,7 @@
         "feature_log": "启用日志",
         "feature_error_page": "启用错误页",
         "feature_encode": "启用压缩",
+        "feature_tls_snippet": "启用预设TLS片段",
         "legend_general_options": "通用选项",
         "admin_api_port_label": "管理API端口 (只读)",
         "http_port_label": "HTTP 端口",

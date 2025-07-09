@@ -39,4 +39,8 @@
 	{{- if .Encode.EnableEncode}}
 	import encode
 	{{- end}}
+
+	{{- if .TLSSnippet.EnableSiteTLSSnippet}}
+	import tls
+	{{- end}}
 }

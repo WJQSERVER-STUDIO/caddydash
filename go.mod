@@ -4,11 +4,12 @@ go 1.24.4
 
 require (
 	github.com/BurntSushi/toml v1.5.0
+	github.com/fenthope/cachectrl v0.0.0-20250709065815-efbebb603c17
 	github.com/fenthope/compress v0.0.3
 	github.com/fenthope/reco v0.0.3
 	github.com/fenthope/record v0.0.3
 	github.com/fenthope/sessions v0.0.1
-	github.com/infinite-iroha/touka v0.2.9
+	github.com/infinite-iroha/touka v0.3.0
 	github.com/klauspost/compress v1.18.0
 	golang.org/x/crypto v0.39.0
 	modernc.org/sqlite v1.38.0
@@ -18,7 +19,7 @@ require (
 	github.com/WJQSERVER-STUDIO/go-utils/copyb v0.0.6 // indirect
 	github.com/WJQSERVER-STUDIO/httpc v0.8.0 // indirect
 	github.com/dustin/go-humanize v1.0.1 // indirect
-	github.com/go-json-experiment/json v0.0.0-20250626171732-1a886bd29d1b // indirect
+	github.com/go-json-experiment/json v0.0.0-20250709061156-d2cd4771eb1b // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/gorilla/context v1.1.2 // indirect
 	github.com/gorilla/securecookie v1.1.2 // indirect

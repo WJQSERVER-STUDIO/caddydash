@@ -134,6 +134,7 @@ func main() {
 	defer logger.Close()
 	r.SetLogger(logger)
 	r.Use(record.Middleware())
+	setCacheControl(r)
 
 	r.Use(compress.Compression(compress.CompressOptions{
 		// Algorithms: 配置每种压缩算法的级别和是否启用对象池

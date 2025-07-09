@@ -114,7 +114,8 @@ async function handleSaveConfig(e) {
         headers: getHeadersMap('header_key', 'header_value'),
         log_config: { enable_log: DOMElements.configForm.querySelector('#enable_log').checked, log_domain: domain },
         error_page_config: { enable_error_page: DOMElements.configForm.querySelector('#enable_error_page').checked },
-        encode_config: { enable_encode: DOMElements.configForm.querySelector('#enable_encode').checked }
+        encode_config: { enable_encode: DOMElements.configForm.querySelector('#enable_encode').checked },
+        tls_snippet_config: { enable_site_tls_snippet: DOMElements.configForm.querySelector('#enable_tls_snippet').checked },
     };
     try {
         const result = await api.put(`/config/file/${domain}`, configData);

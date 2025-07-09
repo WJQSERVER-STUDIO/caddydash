@@ -19,6 +19,7 @@ type CaddyUniConfig struct {
 	Log          CaddyUniLogConfig        `json:"log_config"`
 	ErrorPage    CaddyUniErrorPageConfig  `json:"error_page_config"`
 	Encode       CaddyUniEncodeConfig     `json:"encode_config"`
+	TLSSnippet   CaddyUniTLSSnippetConfig `json:"tls_snippet_config"`
 }
 
 type CaddyUniDomainConfig struct {
@@ -52,6 +53,10 @@ type CaddyUniErrorPageConfig struct {
 
 type CaddyUniEncodeConfig struct {
 	EnableEncode bool `json:"enable_encode"`
+}
+
+type CaddyUniTLSSnippetConfig struct {
+	EnableSiteTLSSnippet bool `json:"enable_site_tls_snippet"`
 }
 
 type CaddyGlobalConfig struct {
