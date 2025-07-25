@@ -9,7 +9,7 @@ require (
 	github.com/fenthope/reco v0.0.3
 	github.com/fenthope/record v0.0.3
 	github.com/fenthope/sessions v0.0.1
-	github.com/infinite-iroha/touka v0.3.1
+	github.com/infinite-iroha/touka v0.3.3
 	github.com/klauspost/compress v1.18.0
 	golang.org/x/crypto v0.40.0
 	modernc.org/sqlite v1.38.0
@@ -17,6 +17,7 @@ require (
 
 require (
 	github.com/WJQSERVER-STUDIO/go-utils/copyb v0.0.6 // indirect
+	github.com/WJQSERVER-STUDIO/go-utils/iox v0.0.2 // indirect
 	github.com/WJQSERVER-STUDIO/httpc v0.8.1 // indirect
 	github.com/dustin/go-humanize v1.0.1 // indirect
 	github.com/go-json-experiment/json v0.0.0-20250714165856-be8212f5270d // indirect
