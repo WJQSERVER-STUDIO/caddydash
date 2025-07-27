@@ -20,6 +20,7 @@ type CaddyUniConfig struct {
 	ErrorPage    CaddyUniErrorPageConfig  `json:"error_page_config"`
 	Encode       CaddyUniEncodeConfig     `json:"encode_config"`
 	TLSSnippet   CaddyUniTLSSnippetConfig `json:"tls_snippet_config"`
+	Cache        CaddyUniCacheConfig      `json:"cache_config"`
 }
 
 type CaddyUniDomainConfig struct {
@@ -57,6 +58,12 @@ type CaddyUniEncodeConfig struct {
 
 type CaddyUniTLSSnippetConfig struct {
 	EnableSiteTLSSnippet bool `json:"enable_site_tls_snippet"`
+}
+
+type CaddyUniCacheConfig struct {
+	EnableCache bool   `json:"enable_cache"`
+	Stale       string `json:"stale"`
+	TTL         string `json:"ttl"`
 }
 
 type CaddyGlobalConfig struct {

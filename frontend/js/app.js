@@ -61,6 +61,11 @@ async function handleEditConfig(originalFilename) {
         showRenderedConfig(rendered, originalFilename);
         const mode = config.upstream_config?.enable_upstream ? 'reverse_proxy' : (config.file_server_config?.enable_file_server ? 'file_server' : 'none');
         updateServiceModeView(mode);
+
+        // Manually trigger change event for cache checkbox to set initial state
+        const enableCacheCheckbox = DOMElements.configForm.querySelector('#enable_cache');
+        enableCacheCheckbox.dispatchEvent(new Event('change'));
+
         state.initialFormState = await getFormStateAsString();
     } catch (error) { notification.toast(t('toasts.load_config_detail_error', { error: error.message }), 'error'); }
 }
@@ -261,6 +266,88 @@ function pageInit() {
     DOMElements.mutiUpstreamCheckbox.addEventListener('change', (e) => {
         updateMultiUpstreamView(e.target.checked);
     });
+
+    // --- Re-implemented Accordion Logic ---
+
+    const accordionHeaders = DOMElements.configForm.querySelectorAll('.accordion-header');
+
+    // Function to update the max-height of an accordion content area
+    const updateAccordionHeight = (content) => {
+        // Only update if the accordion is currently open
+        if (content.style.maxHeight !== '0px' && content.style.maxHeight) {
+            // Set max-height to its own scroll height, allowing it to expand or shrink
+            content.style.maxHeight = content.scrollHeight + 'px';
+        }
+    };
+
+    accordionHeaders.forEach(header => {
+        header.addEventListener('click', () => {
+            const content = header.nextElementSibling;
+            const parentAccordion = header.closest('.accordion');
+
+            // Toggle the active class on the header
+            header.classList.toggle('active');
+
+            // Toggle the max-height to show or hide the content
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+            } else {
+                content.style.maxHeight = content.scrollHeight + 'px';
+            }
+
+            // After toggling, we may need to update the height of parent accordions.
+            // This is a complex task because of animations. We will listen for the transition to end.
+            const updateParentAccordions = () => {
+                let parent = header.parentElement.closest('.accordion-content');
+                while (parent) {
+                    // Update the height of the parent accordion content
+                    parent.style.maxHeight = parent.scrollHeight + 'px';
+                    parent = parent.parentElement.closest('.accordion-content');
+                }
+            };
+
+            // When our animation finishes, we'll call the update function.
+            content.addEventListener('transitionend', updateParentAccordions, { once: true });
+        });
+    });
+
+    const enableCacheCheckbox = DOMElements.configForm.querySelector('#enable_cache');
+    const cacheSubAccordion = DOMElements.configForm.querySelector('#cache-sub-accordion');
+    const mainAccordionContent = cacheSubAccordion.closest('.accordion-content');
+
+    // Function to handle changes and update parent accordion
+    const handleCacheToggle = (isChecked) => {
+        cacheSubAccordion.classList.toggle('hidden', !isChecked);
+        // We must update the parent accordion's height *after* the sub-accordion's visibility has changed
+        if (mainAccordionContent) {
+            // Use a short timeout to allow the browser to render the change in visibility,
+            // then update the height. This ensures scrollHeight is calculated correctly.
+            setTimeout(() => updateAccordionHeight(mainAccordionContent), 50);
+        }
+    };
+
+    enableCacheCheckbox.addEventListener('change', (e) => {
+        handleCacheToggle(e.target.checked);
+    });
+
+    // Also, observe the sub-accordion for any changes that might affect its height
+    // This is robust for cases where content is dynamically added/removed from the sub-accordion
+    const observer = new MutationObserver(() => {
+        if (mainAccordionContent) {
+            updateAccordionHeight(mainAccordionContent);
+        }
+    });
+
+    // Start observing the sub-accordion's content area for changes
+    const subAccordionContent = cacheSubAccordion.querySelector('.accordion-content-inner');
+    if (subAccordionContent) {
+        observer.observe(subAccordionContent, {
+            childList: true, // watch for direct children changes
+            subtree: true,   // watch for all descendants
+            attributes: true, // watch for attribute changes
+            characterData: true // watch for text changes
+        });
+    }
 }
 
 // 使用通用初始化函数启动页面

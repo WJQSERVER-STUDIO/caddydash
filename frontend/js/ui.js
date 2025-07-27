@@ -119,6 +119,9 @@ export function fillForm(config, originalFilename) {
     document.getElementById('enable_log').checked = config.log_config?.enable_log || false;
     document.getElementById('enable_error_page').checked = config.error_page_config?.enable_error_page || false;
     document.getElementById('enable_encode').checked = config.encode_config?.enable_encode || false;
+    document.getElementById('enable_cache').checked = config.cache_config?.enable_cache || false;
+    document.getElementById('cache_stale').value = config.cache_config?.stale || '0s';
+    document.getElementById('cache_ttl').value = config.cache_config?.ttl || '0s';
     updateMultiUpstreamView(DOMElements.mutiUpstreamCheckbox.checked);
 }
 

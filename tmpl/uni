@@ -43,4 +43,8 @@
 	{{- if .TLSSnippet.EnableSiteTLSSnippet}}
 	import tls
 	{{- end}}
+
+	{{- if .Cache.EnableCache}}
+	import cache {{.Cache.Stale}} {{.Cache.TTL}}
+	{{- end}}
 }

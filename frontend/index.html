@@ -153,19 +153,72 @@
 
                         <fieldset>
                             <legend data-i18n="form.legend_features">附加功能</legend>
-                            <div class="checkbox-grid">
-                                <label class="custom-checkbox"><input type="checkbox" id="enable_log"
-                                        name="enable_log"><span class="checkmark"></span> <span
-                                        data-i18n="form.feature_log">启用日志</span></label>
-                                <label class="custom-checkbox"><input type="checkbox" id="enable_error_page"
-                                        name="enable_error_page"><span class="checkmark"></span> <span
-                                        data-i18n="form.feature_error_page">启用错误页</span></label>
-                                <label class="custom-checkbox"><input type="checkbox" id="enable_encode"
-                                        name="enable_encode"><span class="checkmark"></span> <span
-                                        data-i18n="form.feature_encode">启用压缩</span></label>
-                                <label class="custom-checkbox"><input type="checkbox" id="enable_tls_snippet"
-                                        name="enable_tls_snippet"><span class="checkmark"></span> <span
-                                        data-i18n="form.feature_tls_snippet">启用预设TLS片段</span></label>
+                            <div class="accordion">
+                                <div class="accordion-item">
+                                    <button type="button" class="accordion-header">
+                                        <span data-i18n="form.accordion_performance">性能优化</span>
+                                        <i class="fa-solid fa-chevron-down"></i>
+                                    </button>
+                                    <div class="accordion-content">
+                                        <div class="accordion-content-inner">
+                                            <div class="feature-item">
+                                                <label class="custom-checkbox"><input type="checkbox" id="enable_encode" name="enable_encode"><span class="checkmark"></span> <span data-i18n="form.feature_encode">启用压缩</span></label>
+                                            </div>
+                                            <div class="feature-item">
+                                                <label class="custom-checkbox"><input type="checkbox" id="enable_cache" name="enable_cache"><span class="checkmark"></span> <span data-i18n="form.feature_cache">启用缓存</span></label>
+                                            <div id="cache-sub-accordion" class="sub-accordion hidden">
+                                                <div class="accordion-item">
+                                                    <button type="button" class="accordion-header sub-accordion-header">
+                                                        <span data-i18n="form.legend_cache">缓存配置</span>
+                                                        <i class="fa-solid fa-chevron-down"></i>
+                                                    </button>
+                                                    <div class="accordion-content">
+                                                        <div class="accordion-content-inner">
+                                                            <div class="form-group">
+                                                                <label for="cache_stale" data-i18n="form.cache_stale_label">Stale Time</label>
+                                                                <input type="text" id="cache_stale" name="cache_stale" value="0s">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="cache_ttl" data-i18n="form.cache_ttl_label">TTL</label>
+                                                                <input type="text" id="cache_ttl" name="cache_ttl" value="0s">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <button type="button" class="accordion-header">
+                                        <span data-i18n="form.accordion_security">安全与TLS</span>
+                                        <i class="fa-solid fa-chevron-down"></i>
+                                    </button>
+                                    <div class="accordion-content">
+                                        <div class="accordion-content-inner">
+                                            <div class="feature-item">
+                                                <label class="custom-checkbox"><input type="checkbox" id="enable_tls_snippet" name="enable_tls_snippet"><span class="checkmark"></span> <span data-i18n="form.feature_tls_snippet">启用预设TLS片段</span></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <button type="button" class="accordion-header">
+                                        <span data-i18n="form.accordion_troubleshooting">日志与排错</span>
+                                        <i class="fa-solid fa-chevron-down"></i>
+                                    </button>
+                                    <div class="accordion-content">
+                                        <div class="accordion-content-inner">
+                                            <div class="feature-item">
+                                                <label class="custom-checkbox"><input type="checkbox" id="enable_log" name="enable_log"><span class="checkmark"></span> <span data-i18n="form.feature_log">启用日志</span></label>
+                                            </div>
+                                            <div class="feature-item">
+                                                <label class="custom-checkbox"><input type="checkbox" id="enable_error_page" name="enable_error_page"><span class="checkmark"></span> <span data-i18n="form.feature_error_page">启用错误页</span></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </fieldset>
                         <div class="form-actions">

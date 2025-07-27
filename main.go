@@ -119,8 +119,12 @@ func main() {
 	defer cdb.CloseDB()
 
 	r := touka.Default()
+	logLevel := reco.LevelInfo
+	if cfg.Server.Debug {
+		logLevel = reco.LevelDebug
+	}
 	logger, err := reco.New(reco.Config{
-		Level:          reco.LevelInfo,
+		Level:          logLevel,
 		Mode:           reco.ModeText,
 		FilePath:       cfg.Server.CaddyDir + "log/caddydash.log",
 		MaxFileSizeMB:  5,
@@ -175,7 +179,9 @@ func main() {
 	})
 	r.Use(sessions.Sessions("mysession", store))
 	// 应用 session 中间件
-	r.Use(api.SessionMiddleware(cdb))
+	if !cfg.Server.Debug {
+		r.Use(api.SessionMiddleware(cdb))
+	}
 
 	v0 := r.Group("/v0")
 	api.ApiGroup(v0, cdb, cfg, version)
