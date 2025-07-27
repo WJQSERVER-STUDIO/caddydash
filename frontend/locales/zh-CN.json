@@ -154,7 +154,10 @@
         "legend_ech_config": "加密客户端问候 (ECH)",
         "enable_ech_experimental": "启用 ECH (实验性功能)",
         "ech_outer_sni_label": "ECH Outer SNI",
-        "ech_outer_sni_placeholder": "例如: ech.example.com"
+        "ech_outer_sni_placeholder": "例如: ech.example.com",
+        "enable_rate_limit": "启用速率限制",
+        "rate_limit_rate_label": "速率",
+        "rate_limit_rate_placeholder": "例如: 10r/s, 600r/m, 3600r/h"
     },
     "dialogs": {
         "unsaved_changes_title": "未保存的更改",

@@ -154,7 +154,10 @@
         "legend_ech_config": "Encrypted Client Hello (ECH)",
         "enable_ech_experimental": "Enable ECH (Experimental)",
         "ech_outer_sni_label": "ECH Outer SNI",
-        "ech_outer_sni_placeholder": "e.g., ech.example.com"
+        "ech_outer_sni_placeholder": "e.g., ech.example.com",
+        "enable_rate_limit": "Enable Rate Limit",
+        "rate_limit_rate_label": "Rate",
+        "rate_limit_rate_placeholder": "e.g., 10r/s, 600r/m, 3600r/h"
     },
     "dialogs": {
         "unsaved_changes_title": "Unsaved Changes",

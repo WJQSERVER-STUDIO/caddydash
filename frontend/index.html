@@ -164,28 +164,33 @@
                                             <div class="feature-item">
                                                 <label class="custom-checkbox"><input type="checkbox" id="enable_encode" name="enable_encode"><span class="checkmark"></span> <span data-i18n="form.feature_encode">启用压缩</span></label>
                                             </div>
-                                            <div class="feature-item">
-                                                <label class="custom-checkbox"><input type="checkbox" id="enable_cache" name="enable_cache"><span class="checkmark"></span> <span data-i18n="form.feature_cache">启用缓存</span></label>
-                                            <div id="cache-sub-accordion" class="sub-accordion hidden">
-                                                <div class="accordion-item">
-                                                    <button type="button" class="accordion-header sub-accordion-header">
-                                                        <span data-i18n="form.legend_cache">缓存配置</span>
-                                                        <i class="fa-solid fa-chevron-down"></i>
-                                                    </button>
-                                                    <div class="accordion-content">
-                                                        <div class="accordion-content-inner">
-                                                            <div class="form-group">
-                                                                <label for="cache_stale" data-i18n="form.cache_stale_label">Stale Time</label>
-                                                                <input type="text" id="cache_stale" name="cache_stale" value="0s">
+                                            <div class="accordion" id="cache-sub-accordion">
+                                                <div class="accordion-header">
+                                                    <label class="custom-checkbox"><input type="checkbox"
+                                                            id="enable_cache" name="enable_cache"><span
+                                                            class="checkmark"></span><span
+                                                            data-i18n="form.enable_cache">启用缓存</span></label>
+                                                    <i class="fa-solid fa-chevron-down"></i>
+                                                </div>
+                                                <div class="accordion-content">
+                                                    <div class="accordion-content-inner">
+                                                        <div class="form-grid">
+                                                            <div class="form-group"><label for="cache_stale"
+                                                                    data-i18n="form.cache_stale_label">Stale
+                                                                    (过期后继续使用时间)</label><input type="text"
+                                                                    id="cache_stale" name="cache_stale"
+                                                                    placeholder="e.g., 5s, 1m, 2h"
+                                                                    data-i18n-placeholder="form.cache_duration_placeholder">
                                                             </div>
-                                                            <div class="form-group">
-                                                                <label for="cache_ttl" data-i18n="form.cache_ttl_label">TTL</label>
-                                                                <input type="text" id="cache_ttl" name="cache_ttl" value="0s">
+                                                            <div class="form-group"><label for="cache_ttl"
+                                                                    data-i18n="form.cache_ttl_label">TTL
+                                                                    (缓存存活时间)</label><input type="text" id="cache_ttl"
+                                                                    name="cache_ttl" placeholder="e.g., 5s, 1m, 2h"
+                                                                    data-i18n-placeholder="form.cache_duration_placeholder">
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    </div>
-                                            </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -199,6 +204,28 @@
                                         <div class="accordion-content-inner">
                                             <div class="feature-item">
                                                 <label class="custom-checkbox"><input type="checkbox" id="enable_tls_snippet" name="enable_tls_snippet"><span class="checkmark"></span> <span data-i18n="form.feature_tls_snippet">启用预设TLS片段</span></label>
+                                            </div>
+                                            <div class="accordion" id="rate-limit-sub-accordion">
+                                                <div class="accordion-header">
+                                                    <label class="custom-checkbox"><input type="checkbox"
+                                                            id="enable_rate_limit" name="enable_rate_limit"><span
+                                                            class="checkmark"></span><span
+                                                            data-i18n="form.enable_rate_limit">启用速率限制</span></label>
+                                                    <i class="fa-solid fa-chevron-down"></i>
+                                                </div>
+                                                <div class="accordion-content">
+                                                    <div class="accordion-content-inner">
+                                                        <div class="form-grid">
+                                                            <div class="form-group"><label for="rate_limit_rate"
+                                                                    data-i18n="form.rate_limit_rate_label">速率</label><input
+                                                                    type="text" id="rate_limit_rate"
+                                                                    name="rate_limit_rate"
+                                                                    placeholder="e.g., 10r/s, 600r/m, 3600r/h"
+                                                                    data-i18n-placeholder="form.rate_limit_rate_placeholder">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

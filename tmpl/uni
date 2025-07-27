@@ -47,4 +47,8 @@
 	{{- if .Cache.EnableCache}}
 	import cache {{.Cache.Stale}} {{.Cache.TTL}}
 	{{- end}}
+
+	{{- if .RateLimit.EnableRateLimit}}
+	import rate_limit "{{.RateLimit.Rate}}"
+	{{- end}}
 }

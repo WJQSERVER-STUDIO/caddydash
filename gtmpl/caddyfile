@@ -100,7 +100,7 @@
 
 (rate_limit) {
 	route /* {
-		rate_limit {remote.ip} {args[0]}r/m 10000 429
+		rate_limit {remote.ip} {args[0]} 10000 429
 	}
 }
 

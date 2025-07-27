@@ -66,6 +66,16 @@ async function handleEditConfig(originalFilename) {
         const enableCacheCheckbox = DOMElements.configForm.querySelector('#enable_cache');
         enableCacheCheckbox.dispatchEvent(new Event('change'));
 
+        const enableRateLimitCheckbox = DOMElements.configForm.querySelector('#enable_rate_limit');
+        if (config.rate_limit_config) {
+            enableRateLimitCheckbox.checked = config.rate_limit_config.enable_rate_limit;
+            DOMElements.configForm.querySelector('#rate_limit_rate').value = config.rate_limit_config.rate;
+        } else {
+            enableRateLimitCheckbox.checked = false;
+            DOMElements.configForm.querySelector('#rate_limit_rate').value = '';
+        }
+        enableRateLimitCheckbox.dispatchEvent(new Event('change'));
+
         state.initialFormState = await getFormStateAsString();
     } catch (error) { notification.toast(t('toasts.load_config_detail_error', { error: error.message }), 'error'); }
 }
@@ -121,6 +131,10 @@ async function handleSaveConfig(e) {
         error_page_config: { enable_error_page: DOMElements.configForm.querySelector('#enable_error_page').checked },
         encode_config: { enable_encode: DOMElements.configForm.querySelector('#enable_encode').checked },
         tls_snippet_config: { enable_site_tls_snippet: DOMElements.configForm.querySelector('#enable_tls_snippet').checked },
+        rate_limit_config: {
+            enable_rate_limit: DOMElements.configForm.querySelector('#enable_rate_limit').checked,
+            rate: formData.get('rate_limit_rate'),
+        },
     };
     try {
         const result = await api.put(`/config/file/${domain}`, configData);
@@ -317,18 +331,57 @@ function pageInit() {
 
     // Function to handle changes and update parent accordion
     const handleCacheToggle = (isChecked) => {
-        cacheSubAccordion.classList.toggle('hidden', !isChecked);
-        // We must update the parent accordion's height *after* the sub-accordion's visibility has changed
-        if (mainAccordionContent) {
-            // Use a short timeout to allow the browser to render the change in visibility,
-            // then update the height. This ensures scrollHeight is calculated correctly.
-            setTimeout(() => updateAccordionHeight(mainAccordionContent), 50);
+        const content = cacheSubAccordion.querySelector('.accordion-content');
+        if (isChecked) {
+            content.style.maxHeight = content.scrollHeight + 'px';
+        } else {
+            content.style.maxHeight = null;
         }
     };
 
     enableCacheCheckbox.addEventListener('change', (e) => {
         handleCacheToggle(e.target.checked);
     });
+
+    // Initialize the state
+    handleCacheToggle(enableCacheCheckbox.checked);
+
+    const enableRateLimitCheckbox = DOMElements.configForm.querySelector('#enable_rate_limit');
+    const rateLimitSubAccordion = DOMElements.configForm.querySelector('#rate-limit-sub-accordion');
+
+    const handleRateLimitToggle = (isChecked) => {
+        const content = rateLimitSubAccordion.querySelector('.accordion-content');
+        const header = rateLimitSubAccordion.querySelector('.accordion-header');
+        if (isChecked) {
+            content.style.maxHeight = content.scrollHeight + 'px';
+            header.classList.add('active');
+        } else {
+            content.style.maxHeight = null;
+            header.classList.remove('active');
+        }
+    };
+
+    enableRateLimitCheckbox.addEventListener('change', (e) => {
+        handleRateLimitToggle(e.target.checked);
+    });
+
+    // Initialize the state
+    handleRateLimitToggle(enableRateLimitCheckbox.checked);
+
+    const handleCacheAccordionIcon = (isChecked) => {
+        const header = cacheSubAccordion.querySelector('.accordion-header');
+        if(isChecked) {
+            header.classList.add('active');
+        } else {
+            header.classList.remove('active');
+        }
+    }
+
+    enableCacheCheckbox.addEventListener('change', (e) => {
+        handleCacheAccordionIcon(e.target.checked);
+    });
+
+    handleCacheAccordionIcon(enableCacheCheckbox.checked);
 
     // Also, observe the sub-accordion for any changes that might affect its height
     // This is robust for cases where content is dynamically added/removed from the sub-accordion

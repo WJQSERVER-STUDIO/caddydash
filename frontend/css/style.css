@@ -973,20 +973,12 @@ fieldset {
 
 /* --- Accordion Styles (Re-implementation) --- */
 .accordion {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.accordion-item {
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius-small);
-    transition: border-radius 0.3s ease-out;
-}
-
-.accordion-item .accordion-header.active {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
+    margin-bottom: 1rem;
+    background-color: var(--c-bg-secondary);
+    transition: all 0.3s ease;
+    overflow: hidden;
 }
 
 .accordion-header {
@@ -1001,8 +993,7 @@ fieldset {
     font-size: 1rem;
     font-weight: 600;
     color: var(--text-color);
-    transition: background-color 0.2s, border-radius 0.3s ease-out;
-    border-radius: var(--border-radius-small);
+    transition: background-color 0.2s;
 }
 
 .accordion-header:hover {
@@ -1024,18 +1015,13 @@ fieldset {
 .accordion-content {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease-out, padding 0.3s ease-out; /* Add padding to transition */
+    transition: max-height 0.3s ease-out;
     background-color: var(--surface-color);
-}
-
-.accordion-content.active {
-    /* We no longer need a fixed max-height, JS will handle it. */
-    /* Add padding back when active */
-    padding: 16px;
 }
 
 .accordion-content-inner {
     padding: 16px;
+    border-top: 1px solid var(--border-color);
 }
 
 .sub-accordion {
