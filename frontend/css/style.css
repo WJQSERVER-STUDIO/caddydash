@@ -1299,7 +1299,7 @@ fieldset {
     border-radius: var(--border-radius-small);
     height: 60vh;
     overflow-y: auto;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: monospace, Courier;
     font-size: 0.875rem;
     line-height: 1.5;
     border: 1px solid var(--border-color);
