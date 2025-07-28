@@ -356,6 +356,19 @@ ul.preset-list li p {
     padding: 24px 32px;
     overflow-y: auto;
     /* 允许内容垂直滚动 */
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- 页脚 --- */
+.footer {
+    margin-top: auto;
+    /* 将页脚推到容器底部 */
+    padding: 20px 0;
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--text-color-secondary);
+    border-top: 1px solid var(--border-color);
 }
 
 /* --- 视图切换动画 --- */

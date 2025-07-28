@@ -22,7 +22,7 @@ func StreamLog(logFilePath string) touka.HandlerFunc {
 		file, err := os.Open(logFilePath)
 		if err != nil {
 			errorMessage := fmt.Sprintf("Failed to open log file: %v", err)
-			c.Errorf(errorMessage)
+			c.Errorf("%s", errorMessage)
 			fmt.Printf("%s\n", errorMessage)
 			log.Printf("%s", errorMessage)
 			fmt.Fprintf(c.Writer, "event: error\ndata: %s\n\n", errorMessage)
@@ -45,7 +45,7 @@ func StreamLog(logFilePath string) touka.HandlerFunc {
 					break
 				}
 				errorMessage := fmt.Sprintf("Error reading log file for history: %v", err)
-				c.Errorf(errorMessage)
+				c.Errorf("%s", errorMessage)
 				fmt.Printf("%s\n", errorMessage)
 				log.Printf("%s", errorMessage)
 				fmt.Fprintf(c.Writer, "event: error\ndata: %s\n\n", errorMessage)
@@ -75,7 +75,7 @@ func StreamLog(logFilePath string) touka.HandlerFunc {
 		_, err = file.Seek(0, io.SeekEnd)
 		if err != nil {
 			errorMessage := fmt.Sprintf("Failed to seek to end of log file: %v", err)
-			c.Errorf(errorMessage)
+			c.Errorf("%s", errorMessage)
 			fmt.Printf("%s\n", errorMessage)
 			log.Printf("%s", errorMessage)
 			fmt.Fprintf(c.Writer, "event: error\ndata: %s\n\n", errorMessage)
@@ -107,7 +107,7 @@ func StreamLog(logFilePath string) touka.HandlerFunc {
 					continue
 				} else {
 					errorMessage := fmt.Sprintf("Error reading log file: %v", err)
-					c.Errorf(errorMessage)
+					c.Errorf("%s", errorMessage)
 					fmt.Printf("%s\n", errorMessage)
 					log.Printf("%s", errorMessage)
 					fmt.Fprintf(c.Writer, "event: error\ndata: %s\n\n", errorMessage)

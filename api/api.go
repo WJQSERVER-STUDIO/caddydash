@@ -63,7 +63,7 @@ func ApiGroup(v0 touka.IRouter, cdb *db.ConfigDB, cfg *config.Config, version st
 
 		logs := caddy.Group("/logs")
 		{
-			logs.GET("/stdout", StreamLog(cfg.Server.CaddyDir+"caddystdout.log"))
+			logs.GET("/stdout", StreamLog(cfg.Server.CaddyDir+"log/caddystdout.log"))
 			logs.GET("/caddy", StreamLog(cfg.Server.CaddyDir+"log/caddy.log"))
 			logs.GET("/sites", ListSiteLogs(cfg.Server.CaddyDir+"log"))
 			logs.GET("/site/:sitename", SiteLog(cfg.Server.CaddyDir+"log"))

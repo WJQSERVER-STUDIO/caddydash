@@ -63,7 +63,6 @@ func PutGlobalConfig(cdb *db.ConfigDB, cfg *config.Config) touka.HandlerFunc {
 		}
 
 		c.JSON(200, touka.H{"message": "global config saved"})
-		return
 	}
 }
 

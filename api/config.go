@@ -71,7 +71,6 @@ func PutConfig(cdb *db.ConfigDB, cfg *config.Config) touka.HandlerFunc {
 		}
 
 		c.JSON(200, touka.H{"message": "config saved and rendered"})
-		return
 	}
 }
 
