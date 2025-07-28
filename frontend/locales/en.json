@@ -3,6 +3,7 @@
         "configs": "Site Configs",
         "global": "Global Config",
         "settings": "Panel Settings",
+        "caddy_logs": "Caddy Logs",
         "logout": "Logout"
     },
     "status": {
@@ -95,7 +96,17 @@
             "setup_btn": "Complete Setup",
             "setting_up_btn": "Setting up..."
         },
-        "totaldesc": "A Simple Caddy Manager WebUI"
+        "totaldesc": "A Simple Caddy Manager WebUI",
+        "caddy_logs": {
+            "page_title": "Caddy Logs - CaddyDash",
+            "title": "Caddy Logs",
+            "select_log_label": "Select Log:",
+            "log_type_stdout": "Standard Output (stdout)",
+            "log_type_caddy": "Caddy Main Log",
+            "log_type_sites_group_label": "Site Access Logs",
+            "no_site_logs": "No site logs available",
+            "select_site_label": "Select Site:"
+        }
     },
     "form": {
         "legend_basic": "Basic Config",
@@ -196,6 +207,10 @@
         "init_success": "Setup complete! Redirecting to login...",
         "init_error_generic": "Initialization failed. Please try again.",
         "error_all_fields_required": "All fields are required.",
-        "pwd_reset_success": "Password reset successfully. Please log in with your new password."
+        "pwd_reset_success": "Password reset successfully. Please log in with your new password.",
+        "log_connection_error": "Log connection error, retrying...",
+        "load_site_logs_error": "Failed to load site logs",
+        "log_connection_closed": "Log connection closed, attempting to reconnect...",
+        "log_connection_established": "Log connection established"
     }
 }

@@ -3,6 +3,7 @@
         "configs": "站点配置",
         "global": "全局配置",
         "settings": "面板设置",
+        "caddy_logs": "Caddy 日志",
         "logout": "退出登录"
     },
     "status": {
@@ -95,7 +96,17 @@
             "setup_btn": "完成设置",
             "setting_up_btn": "设置中..."
         },
-        "totaldesc": "一个简单的 Caddy 管理面板"
+        "totaldesc": "一个简单的 Caddy 管理面板",
+        "caddy_logs": {
+            "page_title": "Caddy 日志 - CaddyDash",
+            "title": "Caddy 日志",
+            "select_log_label": "选择日志:",
+            "log_type_stdout": "标准输出 (stdout)",
+            "log_type_caddy": "Caddy 主日志",
+            "log_type_sites_group_label": "站点访问日志",
+            "no_site_logs": "没有可用的站点日志",
+            "select_site_label": "选择站点:"
+        }
     },
     "form": {
         "legend_basic": "基础配置",
@@ -194,6 +205,10 @@
         "init_error_mismatch": "两次输入的密码不一致",
         "init_error_short": "密码至少需要 {minLength} 位字符",
         "init_success": "设置完成！正在跳转到登录页...",
-        "init_error_generic": "初始化失败，请重试"
+        "init_error_generic": "初始化失败，请重试",
+        "log_connection_error": "日志连接错误，正在重试...",
+        "load_site_logs_error": "加载站点日志失败",
+        "log_connection_closed": "日志连接已关闭，正在尝试重新连接...",
+        "log_connection_established": "日志连接已建立"
     }
 }

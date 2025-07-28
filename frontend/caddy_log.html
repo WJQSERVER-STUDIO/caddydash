@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="pages.caddy_logs.page_title">Caddy Logs - CaddyDash</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <header class="sidebar-header"><i class="fa-solid fa-rocket"></i>
+                <h1>CaddyDash</h1>
+            </header>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="/" data-nav-id="configs"><i class="fa-solid fa-sitemap"></i> <span
+                                data-i18n="nav.configs">站点配置</span></a></li>
+                    <li><a href="/global.html" data-nav-id="global"><i class="fa-solid fa-globe"></i>
+                            <span data-i18n="nav.global">全局配置</span></a></li>
+                    <li><a href="/settings.html" data-nav-id="settings"><i class="fa-solid fa-gears"></i>
+                            <span data-i18n="nav.settings">面板设置</span></a></li>
+                    <li><a href="/caddy_log.html" data-nav-id="caddy_logs"><i class="fa-solid fa-file-lines"></i>
+                            <span data-i18n="nav.caddy_logs">Caddy 日志</span></a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-bottom">
+                <div class="theme-switcher"><i class="fa-solid fa-sun"></i><label class="switch"><input type="checkbox"
+                            id="theme-toggle-input"><span class="slider"></span></label><i class="fa-solid fa-moon"></i>
+                </div>
+                <div class="caddy-control-panel">
+                    <div id="caddy-status-indicator" class="caddy-status"><span class="status-dot checking"></span><span
+                            class="status-text" data-i18n="status.checking">检查中...</span></div>
+                    <div id="caddy-action-button-container"></div>
+                </div>
+                <div class="logout-section"><button id="logout-btn" class="btn btn-secondary"><i
+                            class="fa-solid fa-right-from-bracket"></i><span data-i18n="nav.logout">退出登录</span></button>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <button class="btn-icon" id="menu-toggle-btn"><i class="fa-solid fa-bars"></i></button>
+                <h2 data-i18n="pages.caddy_logs.title">Caddy 日志</h2>
+            </header>
+
+            <div id="view-container">
+                <section class="card-panel">
+                    <div class="tabs">
+                        <button class="tab-link active" data-tab="stdout"
+                            data-i18n="pages.caddy_logs.log_type_stdout">标准输出 (stdout)</button>
+                        <button class="tab-link" data-tab="caddy" data-i18n="pages.caddy_logs.log_type_caddy">Caddy
+                            主日志</button>
+                        <button class="tab-link" data-tab="sites"
+                            data-i18n="pages.caddy_logs.log_type_sites_group_label">站点访问日志</button>
+                    </div>
+
+                    <div id="stdout-tab" class="tab-content active">
+                        <pre id="stdout-log-content" class="log-content"></pre>
+                    </div>
+
+                    <div id="caddy-tab" class="tab-content">
+                        <pre id="caddy-log-content" class="log-content"></pre>
+                    </div>
+
+                    <div id="sites-tab" class="tab-content">
+                        <div id="site-log-selector-container">
+                            <label for="site-log-selector"
+                                data-i18n="pages.caddy_logs.select_site_label">选择站点:</label>
+                            <select id="site-log-selector"></select>
+                        </div>
+                        <pre id="site-log-content" class="log-content"></pre>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <div id="toast-container" class="toast-container"></div>
+    <div id="dialog-container"></div>
+    <div id="modal-container"></div>
+
+    <script type="module" src="js/caddy_log.js"></script>
+</body>
+
+</html>

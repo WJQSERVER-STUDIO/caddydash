@@ -54,11 +54,20 @@ func ApiGroup(v0 touka.IRouter, cdb *db.ConfigDB, cfg *config.Config, version st
 	}
 
 	// caddy实例相关
+	caddy := api.Group("/caddy")
 	{
-		api.POST("/caddy/stop", apic.StopCaddy()) // 无需payload
-		api.POST("/caddy/run", apic.StartCaddy(cfg))
-		api.POST("/caddy/restart", apic.RestartCaddy(cfg))
-		api.GET("/caddy/status", apic.IsCaddyRunning())
+		caddy.POST("/stop", apic.StopCaddy()) // 无需payload
+		caddy.POST("/run", apic.StartCaddy(cfg))
+		caddy.POST("/restart", apic.RestartCaddy(cfg))
+		caddy.GET("/status", apic.IsCaddyRunning())
+
+		logs := caddy.Group("/logs")
+		{
+			logs.GET("/stdout", StreamLog(cfg.Server.CaddyDir+"caddystdout.log"))
+			logs.GET("/caddy", StreamLog(cfg.Server.CaddyDir+"log/caddy.log"))
+			logs.GET("/sites", ListSiteLogs(cfg.Server.CaddyDir+"log"))
+			logs.GET("/site/:sitename", SiteLog(cfg.Server.CaddyDir+"log"))
+		}
 	}
 
 	// 鉴权相关

@@ -36,15 +36,23 @@ func RunCaddy(cfg *config.Config) error {
 		return nil
 	}
 	ctx, cancel := context.WithCancel(context.Background())
+	log.Printf("Starting Caddy in directory: %s", cfg.Server.CaddyDir)
 	cmd := exec.CommandContext(ctx, "./caddy", "run", "--config", "Caddyfile")
 	cmd.Dir = cfg.Server.CaddyDir
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
-	caddyRunning.SetRunning(true)
-
-	err := cmd.Start()
+	logFile, err := os.OpenFile(cfg.Server.CaddyDir+"log/"+"caddystdout.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
 	if err != nil {
 		cancel()
+		log.Printf("Failed to open log file: %v", err)
+		return err
+	}
+	cmd.Stdout = logFile
+	cmd.Stderr = logFile
+	caddyRunning.SetRunning(true)
+
+	err = cmd.Start()
+	if err != nil {
+		cancel()
+		log.Printf("Failed to start Caddy process: %v", err)
 		return err
 	}
 
@@ -77,8 +85,7 @@ func StartCaddy(cfg *config.Config) touka.HandlerFunc {
 			return
 		}
 		go func() {
-			err := RunCaddy(cfg)
-			if err != nil {
+			if err := RunCaddy(cfg); err != nil {
 				c.Errorf("Failed to start Caddy: %v", err)
 				c.JSON(500, map[string]string{"error": err.Error()})
 				return
@@ -159,8 +166,7 @@ func RestartCaddy(cfg *config.Config) touka.HandlerFunc {
 
 		// StartCaddy
 		go func() {
-			err := RunCaddy(cfg)
-			if err != nil {
+			if err := RunCaddy(cfg); err != nil {
 				c.Errorf("Failed to restart Caddy: %v", err)
 			}
 		}()

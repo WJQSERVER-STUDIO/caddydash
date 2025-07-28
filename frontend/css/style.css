@@ -1240,3 +1240,92 @@ fieldset {
         /* 调整小屏幕内边距 */
     }
 }
+
+/* --- 日志页面特定样式 --- */
+.tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 24px;
+}
+.tab-link {
+    padding: 12px 20px;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    color: var(--text-color-secondary);
+    font-weight: 600;
+    position: relative;
+    transition: color .2s ease;
+}
+.tab-link:hover {
+    color: var(--text-color);
+}
+.tab-link.active {
+    color: var(--primary-color);
+}
+.tab-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+}
+.tab-content {
+    display: none;
+}
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+.log-content {
+    background-color: var(--bg-color);
+    color: var(--text-color-secondary);
+    padding: 16px;
+    border-radius: var(--border-radius-small);
+    height: 60vh;
+    overflow-y: auto;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    border: 1px solid var(--border-color);
+}
+
+.log-line {
+    display: flex;
+    align-items: baseline;
+}
+
+.log-line-number {
+    display: inline-block;
+    width: 40px;
+    min-width: 40px;
+    text-align: right;
+    padding-right: 10px;
+    color: var(--primary-color);
+    user-select: none;
+}
+
+.log-line-content {
+    white-space: pre-wrap;
+    word-break: break-all;
+    color: var(--text-color);
+}
+#site-log-selector-container {
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+#site-log-selector-container label {
+    font-weight: 500;
+}
+#site-log-selector {
+    min-width: 200px;
+    padding: 8px 12px;
+    border-radius: var(--border-radius-small);
+    border: 1px solid var(--border-color);
+    background-color: var(--surface-color);
+    color: var(--text-color);
+}
