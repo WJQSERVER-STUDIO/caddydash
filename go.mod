@@ -6,7 +6,7 @@ require (
 	github.com/BurntSushi/toml v1.5.0
 	github.com/fenthope/cachectrl v0.0.0-20250709065815-efbebb603c17
 	github.com/fenthope/compress v0.0.4
-	github.com/fenthope/reco v0.0.3
+	github.com/fenthope/reco v0.0.4
 	github.com/fenthope/record v0.0.3
 	github.com/fenthope/sessions v0.0.1
 	github.com/infinite-iroha/touka v0.3.4
