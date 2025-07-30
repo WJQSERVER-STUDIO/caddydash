@@ -10,10 +10,10 @@ github.com/fenthope/cachectrl v0.0.0-20250709065815-efbebb603c17 h1:sdtqTAS5z2Zd
 github.com/fenthope/cachectrl v0.0.0-20250709065815-efbebb603c17/go.mod h1:g0Jx18AwlG26CDmtm1p6G6JIWjeklwZXvoJacq7VmBI=
 github.com/fenthope/compress v0.0.4 h1:xIFh38pf0BDWJLECOuO9FlLv7ru+HargghOCErB4KSg=
 github.com/fenthope/compress v0.0.4/go.mod h1:eP19qEOmmujyF0fXt9xZwVmNceHzCB+fY0eMPwwnN8k=
-github.com/fenthope/reco v0.0.3 h1:RmnQ0D9a8PWtwOODawitTe4BztTnS9wYwrDbipISNq4=
-github.com/fenthope/reco v0.0.3/go.mod h1:mDkGLHte5udWTIcjQTxrABRcf56SSdxBOCLgrRDwI/Y=
-github.com/fenthope/record v0.0.3 h1:v5urgs5LAkLMlljAT/MjW8fWuRHXPnAraTem5ui7rm4=
-github.com/fenthope/record v0.0.3/go.mod h1:KFEkSc4TDZ3QIhP/wglD32uYVA6X1OUcripiao1DEE4=
+github.com/fenthope/reco v0.0.4 h1:yo2g3aWwdoMpaZWZX4SdZOW7mCK82RQIU/YI8ZUQThM=
+github.com/fenthope/reco v0.0.4/go.mod h1:eMyS8HpdMVdJ/2WJt6Cvt8P1EH9Igzj5lSJrgc+0jeg=
+github.com/fenthope/record v0.0.4 h1:/1JHNCxiXGLL/qCh4LEGaAvhj4CcKsb6siTxjLmjdO4=
+github.com/fenthope/record v0.0.4/go.mod h1:G0a6KCiCDyX2SsC3nfzSN651fJKxH482AyJvzlnvAJU=
 github.com/fenthope/sessions v0.0.1 h1:Dw4mY2yvSuyTqW+1CrojdO0gzv2gfsNsavRZcaAl7LM=
 github.com/fenthope/sessions v0.0.1/go.mod h1:4aI2BN1jb8MF1qTzXb4QX+GnAzmJWb57S3lDKxUyK8A=
 github.com/go-json-experiment/json v0.0.0-20250725192818-e39067aee2d2 h1:iizUGZ9pEquQS5jTGkh4AqeeHCMbfbjeb0zMt0aEFzs=
