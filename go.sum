@@ -10,8 +10,8 @@ github.com/fenthope/cachectrl v0.0.0-20250709065815-efbebb603c17 h1:sdtqTAS5z2Zd
 github.com/fenthope/cachectrl v0.0.0-20250709065815-efbebb603c17/go.mod h1:g0Jx18AwlG26CDmtm1p6G6JIWjeklwZXvoJacq7VmBI=
 github.com/fenthope/compress v0.0.4 h1:xIFh38pf0BDWJLECOuO9FlLv7ru+HargghOCErB4KSg=
 github.com/fenthope/compress v0.0.4/go.mod h1:eP19qEOmmujyF0fXt9xZwVmNceHzCB+fY0eMPwwnN8k=
-github.com/fenthope/reco v0.0.3 h1:RmnQ0D9a8PWtwOODawitTe4BztTnS9wYwrDbipISNq4=
-github.com/fenthope/reco v0.0.3/go.mod h1:mDkGLHte5udWTIcjQTxrABRcf56SSdxBOCLgrRDwI/Y=
+github.com/fenthope/reco v0.0.4 h1:yo2g3aWwdoMpaZWZX4SdZOW7mCK82RQIU/YI8ZUQThM=
+github.com/fenthope/reco v0.0.4/go.mod h1:eMyS8HpdMVdJ/2WJt6Cvt8P1EH9Igzj5lSJrgc+0jeg=
 github.com/fenthope/record v0.0.3 h1:v5urgs5LAkLMlljAT/MjW8fWuRHXPnAraTem5ui7rm4=
 github.com/fenthope/record v0.0.3/go.mod h1:KFEkSc4TDZ3QIhP/wglD32uYVA6X1OUcripiao1DEE4=
 github.com/fenthope/sessions v0.0.1 h1:Dw4mY2yvSuyTqW+1CrojdO0gzv2gfsNsavRZcaAl7LM=
@@ -30,8 +30,8 @@ github.com/gorilla/securecookie v1.1.2 h1:YCIWL56dvtr73r6715mJs5ZvhtnY73hBvEF8kX
 github.com/gorilla/securecookie v1.1.2/go.mod h1:NfCASbcHqRSY+3a8tlWJwsQap2VX5pwzwo4h3eOamfo=
 github.com/gorilla/sessions v1.4.0 h1:kpIYOp/oi6MG/p5PgxApU8srsSw9tuFbt46Lt7auzqQ=
 github.com/gorilla/sessions v1.4.0/go.mod h1:FLWm50oby91+hl7p/wRxDth9bWSuk0qVL2emc7lT5ik=
-github.com/infinite-iroha/touka v0.3.4 h1:vYDjfXTkjpTe7tasSVbPeVAPSXzd/wS1T2tkiMx/Wwk=
-github.com/infinite-iroha/touka v0.3.4/go.mod h1:xOKkEKTWYLHIBW6qbL2O6nSAO0RyDLsVXPtJxFYg/YM=
+github.com/infinite-iroha/touka v0.3.6 h1:SkpM/VFGCWOFQP3RRuoWdX/Q4zafPngG1VMwkrLwtkw=
+github.com/infinite-iroha/touka v0.3.6/go.mod h1:XW7a3fpLAjJfylSmdNuDQ8wGKkKmLVi9V/89sT1d7uw=
 github.com/klauspost/compress v1.18.0 h1:c/Cqfb0r+Yi+JtIEq73FWXVkRonBlf0CRNYc8Zttxdo=
 github.com/klauspost/compress v1.18.0/go.mod h1:2Pp+KzxcywXVXMr50+X0Q/Lsb43OQHYWRCY2AiWywWQ=
 github.com/mattn/go-isatty v0.0.20 h1:xfD0iDuEKnDkl03q4limB+vH+GxLEtL/jb4xVJSWWEY=
