@@ -9,7 +9,7 @@ require (
 	github.com/fenthope/reco v0.0.4
 	github.com/fenthope/record v0.0.3
 	github.com/fenthope/sessions v0.0.1
-	github.com/infinite-iroha/touka v0.3.7
+	github.com/infinite-iroha/touka v0.3.8
 	github.com/klauspost/compress v1.18.0
 	golang.org/x/crypto v0.41.0
 	modernc.org/sqlite v1.38.2
